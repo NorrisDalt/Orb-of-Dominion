@@ -19,7 +19,7 @@ public class Camera : MonoBehaviour
 
     void LateUpdate()
     {
-        // Get mouse input
+        //get mouse input
         yaw += Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
         pitch = Mathf.Clamp(pitch, -45f, 45f); //limit vertical camera rotation
