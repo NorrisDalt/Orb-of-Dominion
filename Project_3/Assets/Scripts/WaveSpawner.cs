@@ -23,7 +23,7 @@ public class WaveSpawner : MonoBehaviour
             for(int i = 0; i < currentWave.enemyCount; i++)
             {
                 Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)]; // Sets spawnPoint to a random point from the spawnPoints array
-                Instantiate(currentWave.enemyPrefab, spawnPoint.position, spawnPoint.rotation);// Spawns at spawnPoint
+                GameObject clone = Instantiate(currentWave.enemyPrefab, spawnPoint.position, spawnPoint.rotation);// Spawns at spawnPoint
 
                 yield return new WaitForSeconds(currentWave.spawnDelay);
             }
