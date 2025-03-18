@@ -24,7 +24,10 @@ public class WaveSpawner : MonoBehaviour
             Wave currentWave = waves[currentWaveIndex];
             Debug.Log("Wave " + currentWaveIndex);
 
-            for(int i = 0; i < currentWave.enemyCount; i++)
+            int enemyCount = currentWave.GetEnemyCount(currentWaveIndex);
+
+
+            for(int i = 0; i < enemyCount; i++)
             {
                 Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)]; // Sets spawnPoint to a random point from the spawnPoints array
                 GameObject clone = Instantiate(currentWave.enemyPrefab, spawnPoint.position, spawnPoint.rotation);// Spawns at spawnPoint
