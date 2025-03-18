@@ -6,35 +6,67 @@ public class PlayerMovement : MonoBehaviour
 {
     public float MoveSpeed = 10f;
     public float RotateSpeed = 150f;
-    private float _vInput; //vertical input
-    private float _hInput; //horizontal input
+    public float JumpForce = 5f;
+    public float GravityMultiplier = 2f;
 
-    public Transform cameraTransform; //the camera's transform
+    private float _vInput;
+    private float _hInput;
+    private bool _isGrounded;
+    private Rigidbody _rb;
+
+    public Transform cameraTransform;
+
+    void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+        _rb.freezeRotation = true; //prevent Rigidbody rotation to avoid camera shake
+    }
 
     void Update()
     {
+        //the vertical and horizontal input values
         _vInput = Input.GetAxis("Vertical") * MoveSpeed;
         _hInput = Input.GetAxis("Horizontal") * MoveSpeed;
 
-        //get the camera's forward and right vectors
+        //jumping
+        if (Input.GetButtonDown("Jump") && _isGrounded)
+        {
+            _rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            _isGrounded = false;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        //get camera direction
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
 
-        //flatten the vectors
         forward.y = 0;
         right.y = 0;
         forward.Normalize();
         right.Normalize();
 
-        //move based on camera's orientation
+        //combine the forward and right inputs with the camera's direction
         Vector3 direction = forward * _vInput + right * _hInput;
+
+        //movement
         if (direction != Vector3.zero)
         {
-            transform.Translate(direction * Time.deltaTime, Space.World);
-
-            //rotate player to face movement direction
+            _rb.MovePosition(_rb.position + direction * Time.fixedDeltaTime);
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * RotateSpeed);
+            _rb.MoveRotation(Quaternion.Slerp(_rb.rotation, targetRotation, Time.fixedDeltaTime * RotateSpeed));
+        }
+
+        //manual gravity to avoid camera shake
+        _rb.AddForce(Physics.gravity * GravityMultiplier, ForceMode.Acceleration);
+    }
+
+    private void OnCollisionEnter(Collision other) //detects when the player is on the ground
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            _isGrounded = true;
         }
     }
 }
