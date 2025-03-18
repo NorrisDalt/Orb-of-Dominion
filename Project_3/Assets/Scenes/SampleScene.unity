@@ -214,7 +214,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741435d4a5c2e854ab49d66d35206299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  temp: {fileID: 759427722}
   waves:
+  - {fileID: 260093798}
+  - {fileID: 260093798}
   - {fileID: 260093798}
   - {fileID: 260093798}
   spawnPoints:
@@ -252,9 +255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 9150807526203764869, guid: b2efc51311a1f2c4c9c54055b57d62cd, type: 3}
-  enemyCount: 20
+  enemyCount: 5
   spawnDelay: 0.5
-  waveDelay: 10
+  waveDelay: 1
 --- !u!1 &285625585
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +377,7 @@ GameObject:
   - component: {fileID: 759427716}
   - component: {fileID: 759427720}
   - component: {fileID: 759427721}
+  - component: {fileID: 759427722}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -512,6 +516,19 @@ MonoBehaviour:
   MoveSpeed: 10
   RotateSpeed: 150
   cameraTransform: {fileID: 2074036908}
+--- !u!114 &759427722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759427715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b37351798ff80149b786f4e1f1b94f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allEnemiesList: []
 --- !u!1 &1007450681
 GameObject:
   m_ObjectHideFlags: 0

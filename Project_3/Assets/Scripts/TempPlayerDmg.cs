@@ -14,14 +14,29 @@ public class TempPlayerDmg : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //FindAllEnemies();
     }
 
-    public void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision other)
     {
-        if(collision.CompareWithTag("Enemy"))
+        if(other.gameObject.CompareTag("Enemy"))
         {
-            allEnemiesList.Add(collision.GameObject);
+            allEnemiesList.Remove(other.gameObject);
+            Destroy(other.gameObject);
         }
     }
+
+    /*public void FindAllEnemies()
+    {
+       GameObject[] enemiesInScene = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemiesInScene)
+        {
+            if(!allEnemiesList.Contains(enemy))
+            {
+                allEnemiesList.Add(enemy);
+            }
+        }
+
+        Debug.Log("Total enemies added to list: " + allEnemiesList.Count);
+    }*/
 }
