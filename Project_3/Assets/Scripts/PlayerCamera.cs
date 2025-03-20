@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class PlayerCamera : MonoBehaviour
 {
     public Vector3 CamOffset = new Vector3(0f, 1.2f, -2.6f);
     public float mouseSensitivity = 100f;
