@@ -1,30 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class FlyingEnemy : MonoBehaviour
 {
     public GameObject flyingType;
-    private NavMeshAgent agent;
+    public UnityEngine.AI.NavMeshAgent agent;
+    private Transform playerPos;
 
-    public Transform playerPos; 
+    private float targetY = 3.5f; // Target Y position
+    private float startY = 3.0f; // Starting Y position
+    private float timer = 0f;    // Timer for interpolation
+    public float duration = 2f; // Duration of the movement cycle
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        agent = GetComponent<NavMeshAgent>();
-        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        Vector3 newPosition = flyingType.transform.position;
+        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        if (flyingType != null)
+        {
+            // Increment the timer
+            timer += Time.deltaTime;
 
-       // newPosition.y = Vector3.MoveTowards()
+            // Calculate the interpolation factor (0 to 1)
+            float t = Mathf.PingPong(timer / duration, 1f);
 
-        flyingType.transform.position = newPosition;
+            // Interpolate the Y position between startY and targetY
+            Vector3 newPosition = flyingType.transform.position;
+            newPosition.y = Mathf.Lerp(startY, targetY, t);
+
+            // Update the position
+            flyingType.transform.position = newPosition;
+        }
+        else
+        {
+            Debug.LogWarning("FlyingType is not assigned!");
+        }
 
         agent.SetDestination(playerPos.position);
     }
