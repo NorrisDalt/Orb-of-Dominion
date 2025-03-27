@@ -5,6 +5,7 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour
 {
     public TempPlayerDmg temp;
+    public OrbMovement orb;
 
     public Wave[] waves;
     public Transform[] spawnPoints;
@@ -32,13 +33,13 @@ public class WaveSpawner : MonoBehaviour
                 Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)]; // Sets spawnPoint to a random point from the spawnPoints array
                 GameObject clone = Instantiate(currentWave.enemyPrefab, spawnPoint.position, spawnPoint.rotation);// Spawns at spawnPoint
                 
-                temp.allEnemiesList.Add(clone);
+                orb.allEnemiesList.Add(clone);
 
                 yield return new WaitForSeconds(currentWave.spawnDelay);
-                Debug.Log("Total enemies added to list: " + temp.allEnemiesList.Count);
+                Debug.Log("Total enemies added to list: " + orb.allEnemiesList.Count);
             }
 
-            while(temp.allEnemiesList.Count > 0)
+            while(orb.allEnemiesList.Count > 0)
             {
                 yield return null;
             }

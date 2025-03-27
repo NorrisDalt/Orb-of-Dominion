@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TempPlayerDmg : MonoBehaviour
 {
-    public List<GameObject> allEnemiesList = new List<GameObject>();
+   /* 
+   // public List<GameObject> allEnemiesList = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {

@@ -12,6 +12,7 @@ public class OrbMovement : MonoBehaviour
     public float speedToHit = 10f;
     public float hoverOffset = 0.5f;
     public Collider orbCollider;
+    public List<GameObject> allEnemiesList = new List<GameObject>();
 
     private Vector3 targetPosition;
     private bool movingToTarget = false;
@@ -77,6 +78,7 @@ public class OrbMovement : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            allEnemiesList.Remove(other.gameObject);
             Destroy(other.gameObject);
         }
     }
