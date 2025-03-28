@@ -30,6 +30,8 @@ public class TrackingProjectile : MonoBehaviour
             Vector3 spawnPosition = player.position + cameraTransform.forward * 1f + Vector3.up * 1.0f; //spawning the projectile
             GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
 
+            StartCoroutine(DestroyProjectile(projectile));
+
             Vector3 shootDirection = cameraTransform.forward; //finding what direction to send it
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
@@ -61,5 +63,11 @@ public class TrackingProjectile : MonoBehaviour
         yield return new WaitUntil(() => projectileScript.hasHit);
 
         orbMovement.SetTargetPosition(projectileScript.hitPosition);
+    }
+
+    private IEnumerator DestroyProjectile(GameObject projectile)
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(projectile);
     }
 }
