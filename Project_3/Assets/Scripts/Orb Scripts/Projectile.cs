@@ -5,10 +5,10 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Vector3 hitPosition; //store the hit position
-    public GameObject homingPosition; 
+    public Vector3 homingPosition; 
     public bool hasHit = false; //flag to check if it�s hit something
 
-    private bool isHoming = true;
+    public bool isHoming = true;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
         if(isHoming == true && collision.gameObject.CompareTag("Enemy") && !hasHit)
         {
             hasHit = true;
-            homingPosition = collision.gameObject;
+            homingPosition = collision.contacts[0].point;
             Destroy(gameObject);
         }
 
