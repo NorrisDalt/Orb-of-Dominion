@@ -5,9 +5,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Vector3 hitPosition; //store the hit position
-    public Vector3 homingPosition; 
+    public GameObject homingPosition; 
     public bool hasHit = false; //flag to check if it�s hit something
-    public Follow follow;
 
     private bool isHoming = true;
 
@@ -23,7 +22,7 @@ public class Projectile : MonoBehaviour
         if(isHoming == true && collision.gameObject.CompareTag("Enemy") && !hasHit)
         {
             hasHit = true;
-            homingPosition = collision.transform.position;
+            homingPosition = collision.gameObject;
             Destroy(gameObject);
         }
 
