@@ -557,25 +557,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305406801}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c4092fed8490d54eba77c9107d05223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 305406802}
   G: 60
---- !u!114 &305406810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 305406801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81e0cc5a3af3c114b9789b712f43637c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &305592109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -659,9 +647,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 305406809}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 305406810}
   m_SourcePrefab: {fileID: 100100000, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
 --- !u!1 &574316580
 GameObject:
@@ -741,6 +726,7 @@ GameObject:
   - component: {fileID: 759427721}
   - component: {fileID: 759427722}
   - component: {fileID: 759427723}
+  - component: {fileID: 759427724}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -917,6 +903,19 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &759427724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759427715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e0cc5a3af3c114b9789b712f43637c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  springJoint: {fileID: 0}
 --- !u!1 &797626922
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,7 +2158,7 @@ GameObject:
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2146116110
 MonoBehaviour:
   m_ObjectHideFlags: 0
