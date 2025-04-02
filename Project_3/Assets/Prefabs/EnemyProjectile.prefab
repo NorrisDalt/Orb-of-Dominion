@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8590629635806464024
+--- !u!1 &734149088075498631
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7174365426794524344}
-  - component: {fileID: 1693396971803352498}
-  - component: {fileID: 595914810354121026}
-  - component: {fileID: 5559457440976723725}
-  - component: {fileID: -5097426563979619927}
-  - component: {fileID: -7166747129789519329}
+  - component: {fileID: 7770274466790715181}
+  - component: {fileID: 8333714343292662021}
+  - component: {fileID: 6116145746748213200}
+  - component: {fileID: 3240139174185927851}
+  - component: {fileID: 8252150247895299943}
+  - component: {fileID: -5714735746403706710}
   m_Layer: 0
-  m_Name: Tracking Projectile
-  m_TagString: Projectile
+  m_Name: EnemyProjectile
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7174365426794524344
+--- !u!4 &7770274466790715181
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590629635806464024}
+  m_GameObject: {fileID: 734149088075498631}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.448675, y: 3.2536643, z: 3.0688412}
-  m_LocalScale: {x: 0.32768875, y: 0.32768875, z: 0.32768875}
+  m_LocalPosition: {x: 5.88, y: 1.142545, z: 8.309196}
+  m_LocalScale: {x: 0.45199, y: 0.45199, z: 0.45199}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1693396971803352498
+--- !u!33 &8333714343292662021
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590629635806464024}
+  m_GameObject: {fileID: 734149088075498631}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &595914810354121026
+--- !u!23 &6116145746748213200
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590629635806464024}
+  m_GameObject: {fileID: 734149088075498631}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 428c5cf24b890144aa762e47c8c519ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,13 +86,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5559457440976723725
+--- !u!135 &3240139174185927851
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590629635806464024}
+  m_GameObject: {fileID: 734149088075498631}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -107,15 +107,15 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &-5097426563979619927
+--- !u!54 &8252150247895299943
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590629635806464024}
+  m_GameObject: {fileID: 734149088075498631}
   serializedVersion: 4
-  m_Mass: 0.01
+  m_Mass: 0.001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -134,19 +134,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-7166747129789519329
+--- !u!114 &-5714735746403706710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590629635806464024}
+  m_GameObject: {fileID: 734149088075498631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f3d711d265dc7443a29c6986200a2b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b88da412f3918741a47f9827ff83935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPosition: {x: 0, y: 0, z: 0}
-  enemyTarget: {fileID: 0}
-  hasHit: 0
-  isHoming: 0
