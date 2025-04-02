@@ -5,6 +5,7 @@ using UnityEngine;
 public class OrbTether : MonoBehaviour
 {
   public SpringJoint springJoint;
+  private bool isTethered = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +20,19 @@ public class OrbTether : MonoBehaviour
 
     public void TetherToggle()
     {
-      if(Input.GetMouseButtonDown(1))
+      if(isTethered == true)
       {
         springJoint.spring = 0f;
         springJoint.damper = 0f;
+        isTethered = false;
+        Debug.Log("Is not tethered");
+      }
+      else
+      {
+        springJoint.spring = 200f;
+        springJoint.damper = 2f;
+        isTethered = true;
+        Debug.Log("IsTethered");
       }
     }
 }

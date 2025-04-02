@@ -453,7 +453,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305406801}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c4092fed8490d54eba77c9107d05223, type: 3}
   m_Name: 
@@ -638,7 +638,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.0010615436, y: 0.008960239, z: -0.074306354}
   serializedVersion: 2
   m_Spring: 0
   m_Damper: 2
@@ -663,6 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a3bea4af7c49f49977cb4d64151e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  singularityAbility: {fileID: 305406809}
   currentAbility: 0
 --- !u!1 &797626922
 GameObject:

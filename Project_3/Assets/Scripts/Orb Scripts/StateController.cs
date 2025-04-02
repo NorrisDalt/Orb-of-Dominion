@@ -6,12 +6,12 @@ public class StateController : MonoBehaviour
 {
     private OrbTether tetherAbility;
     private OrbPortal portalAbility;
-    private SingularityScript singularityAbility;
+    public SingularityScript singularityAbility;
     private OrbMovement orbMovement;
     
     public enum PlayerAbility
     {
-        False = 0,
+        None = 0,
         True = 1,
         Tether = 2,
         Portal = 3,
@@ -24,17 +24,29 @@ public class StateController : MonoBehaviour
     {
         tetherAbility = GetComponent<OrbTether>();
         portalAbility = GetComponent<OrbPortal>();
-        singularityAbility = FindObjectOfType<SingularityScript>();
+        //singularityAbility = FindObjectOfType<SingularityScript>();
         orbMovement = FindObjectOfType<OrbMovement>();
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.Alpha1)) //When player clicking one, portal ability can now be used
         {
             currentAbility = PlayerAbility.Portal;
-            Debug.Log("Portal is active");
+            Debug.Log("Portal is active"); 
              //When player clicks 1 2 3  it should change current ability to number   
         }
+        if(Input.GetKeyDown(KeyCode.Alpha2))//When player clicking two, Singularity ability can now be used
+        {
+            currentAbility = PlayerAbility.Singularity;
+            Debug.Log("Singularity is active");
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha3))//When player clicking 3, tether ability can now be used
+        {
+            currentAbility = PlayerAbility.Tether;
+            Debug.Log("Tether is active");
+        }
+        //Need to add cooldowns and make other abilities turn off once currentAbility state swaps.
+
 
         ActivateAbility();
     }
@@ -48,13 +60,21 @@ public class StateController : MonoBehaviour
         switch(currentAbility)
         {
             case PlayerAbility.Singularity:
-                //Do stuff
-                //singularityAbility.
+                if(Input.GetMouseButtonDown(1))
+                {
+                    singularityAbility.enabled = !singularityAbility.enabled;
+                }
+                if(currentAbility != PlayerAbility.Singularity)
+                {
+                    singularityAbility.enabled = false;
+                }
                 break;
             
             case PlayerAbility.Tether:
-                tetherAbility.TetherToggle();
-                //made add if player click button run script
+                if(Input.GetMouseButtonDown(1))
+                {
+                    tetherAbility.TetherToggle();
+                }
                 break;
 
             case PlayerAbility.Portal:
