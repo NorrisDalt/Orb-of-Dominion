@@ -11,15 +11,15 @@ public class TrackingProjectile : MonoBehaviour
     public Collider orbCollider;
     public OrbMovement orbMovement;
 
-    private float lastFireTime = -Mathf.Infinity; //start at negative infinity so no cooldown at start
+    private float lastFireTime = -Mathf.Infinity; //makes it so that the projectile doesnt start with a cooldown
     public float fireCooldown = 5f;
 
-    void Update() 
+    void Update()
     {
         if (Input.GetMouseButtonDown(0) && Time.time >= lastFireTime + fireCooldown) //cooldown to prevent spamming
         {
             ShootProjectile();
-            lastFireTime = Time.time; //start cooldown after the first shot
+            lastFireTime = Time.time; //starts the cooldown after the first shot
         }
     }
 
@@ -58,14 +58,21 @@ public class TrackingProjectile : MonoBehaviour
         }
     }
 
-    private IEnumerator CheckHitAndMoveOrb(Projectile projectileScript) //move the orb to hit position
+    private IEnumerator CheckHitAndMoveOrb(Projectile projectileScript) //move the orb to hit position or enemy
     {
         yield return new WaitUntil(() => projectileScript.hasHit);
 
-        orbMovement.SetTargetPosition(projectileScript.hitPosition);
+        if (projectileScript.enemyTarget != null) //if the projectile hit an enemy
+        {
+            orbMovement.SetTargetPosition(Vector3.zero, projectileScript.enemyTarget);
+        }
+        else //if the projectile hit the ground
+        {
+            orbMovement.SetTargetPosition(projectileScript.hitPosition, null);
+        }
     }
 
-    private IEnumerator DestroyProjectile(GameObject projectile)
+    private IEnumerator DestroyProjectile(GameObject projectile) //destroys projectile after 3 seconds
     {
         yield return new WaitForSeconds(3f);
         Destroy(projectile);
