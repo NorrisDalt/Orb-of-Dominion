@@ -8,40 +8,49 @@ public class OrbMovement : MonoBehaviour
     public Transform cameraTransform;
     public float orbitSpeed = 50f;
     public float orbitRadius = 2f;
-    public float verticalOffset = 1.0f;
-    public float speedToHit = 10f;
-    public float hoverOffset = 0.5f;
-    public float returnSpeed = 10f;
-    public Collider orbCollider;
-    public List<GameObject> allEnemiesList = new List<GameObject>();
+    public float verticalOffset = 1.0f; //moves the orb up slightly
+    public float speedToHit = 10f; //speed the orb moves to its target
+    public float hoverOffset = 0.5f; //vertical offset so the orb doesn't stick in the ground
+    public float returnSpeed = 10f; //return to player speed
 
-    private Vector3 targetPosition;
+    public Collider orbCollider;
+
+    private Vector3 targetPosition; //the position the orb is moving to
+    private Transform enemyTarget = null; //for tracking the enemy
     private bool movingToTarget = false;
     private bool hasArrived = false;
     private bool returningToPlayer = false;
 
+    public List<GameObject> allEnemiesList = new List<GameObject>();
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && !returningToPlayer) //"F" key to recall the orb
+        //"F" key to recall the orb back to the player
+        if (Input.GetKeyDown(KeyCode.F) && !returningToPlayer)
         {
             StartReturningToPlayer();
         }
 
+        //moves the orb based on its current state
         if (movingToTarget)
         {
-            MoveToTarget();
+            MoveToTarget(); //moving state
+        }
+        else if (enemyTarget != null)
+        {
+            FollowEnemy(); //tracking enemy state
         }
         else if (returningToPlayer)
         {
-            MoveBackToPlayer();
+            MoveBackToPlayer(); //return state
         }
         else if (!hasArrived)
         {
-            OrbitPlayer();
+            OrbitPlayer(); //orbiting state
         }
     }
 
-    void OrbitPlayer() //orb orbits around the player
+    void OrbitPlayer() //orbits orb around the player
     {
         float angle = Time.time * orbitSpeed;
         float x = player.position.x + Mathf.Cos(angle) * orbitRadius;
@@ -51,62 +60,101 @@ public class OrbMovement : MonoBehaviour
         transform.position = new Vector3(x, y, z);
     }
 
-    void MoveToTarget() //moves orb to the location of the projectile
+    //moves the orb to its current target
+    void MoveToTarget()
     {
         if (targetPosition != Vector3.zero)
         {
-            Vector3 targetWithHover = targetPosition + Vector3.up * hoverOffset;
-            transform.position = Vector3.MoveTowards(transform.position, targetWithHover, speedToHit * Time.deltaTime);
+            Vector3 targetWithHover = targetPosition + Vector3.up * hoverOffset; //adds vertical offset so the orb doesn't go into the ground
+            transform.position = Vector3.MoveTowards(transform.position, targetWithHover, speedToHit * Time.deltaTime); //moves the orb to the target
 
+            //checks if orb has arrived
             if (Vector3.Distance(transform.position, targetWithHover) < 0.1f)
             {
-                movingToTarget = false;
-                hasArrived = true;
+                movingToTarget = false; //stops the orb once it has arrived
+                hasArrived = true; //set the orbs state to "arrived"
             }
         }
     }
 
-    void MoveBackToPlayer() //moves orb back to player smoothly
+    void FollowEnemy() //follows current enemy target
     {
-        Vector3 playerPositionWithOffset = player.position + Vector3.up * verticalOffset;
-        transform.position = Vector3.MoveTowards(transform.position, playerPositionWithOffset, returnSpeed * Time.deltaTime);
+        if (enemyTarget == null) //if enemy is already destroyed stop following
+        {
+            return;
+        }
 
-        if (Vector3.Distance(transform.position, playerPositionWithOffset) < 0.1f)
+        //move the orb towards the enemy
+        Vector3 enemyPositionWithHover = enemyTarget.position;
+        transform.position = Vector3.MoveTowards(transform.position, enemyPositionWithHover, speedToHit * Time.deltaTime);
+    }
+
+    void MoveBackToPlayer() //moves the orb back to the player
+    {
+        Vector3 playerPositionWithOffset = player.position + Vector3.up * verticalOffset; //find the players position with a vertical offset to avoid it dragging on the ground
+
+        transform.position = Vector3.MoveTowards(transform.position, playerPositionWithOffset, returnSpeed * Time.deltaTime); //move orb to player
+
+        if (Vector3.Distance(transform.position, playerPositionWithOffset) < 0.1f) //orb stops returning once it reaches the player
         {
             returningToPlayer = false;
-            hasArrived = false; //resume orbiting
+            hasArrived = false;
         }
     }
 
-    public void SetTargetPosition(Vector3 position)
+    //sets the target for the orb (Ground or Enemy)
+    public void SetTargetPosition(Vector3 position, Transform enemy = null)
     {
-        targetPosition = position;
-        movingToTarget = true;
-        hasArrived = false;
+        if (enemy != null) //enemy
+        {
+            enemyTarget = enemy;
+            movingToTarget = false;
+            hasArrived = false;
+        }
+        else //ground
+        {
+            targetPosition = position;
+            movingToTarget = true;
+            hasArrived = false;
+        }
     }
 
-    public void StartReturningToPlayer() //begins the return process
+    //prepares all of the orbs states for returning to the player
+    void StartReturningToPlayer()
     {
         returningToPlayer = true;
         movingToTarget = false;
         hasArrived = false;
+        enemyTarget = null;
     }
 
-    void OnTriggerEnter(Collider other) //destroys enemies upon collision
+    //detects the collision with enemies and the ground
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
-            allEnemiesList.Remove(other.gameObject);
-            Destroy(other.gameObject);
+            Destroy(other.gameObject); //destroys enemy
+
+            if (other.transform == enemyTarget)
+            {
+                enemyTarget = null;
+                hasArrived = false;
+                StartReturningToPlayer(); //orb returns to player after enemy is destroyed
+            }
+        }
+        else if (other.CompareTag("Ground")) //if the orb hits ground, stay in position until "F" is pressed
+        {
+            targetPosition = transform.position;
+            movingToTarget = false;
         }
     }
 
-    public bool HasArrived()
+    public bool HasArrived() //return whether the orb has arrived at its target
     {
         return hasArrived;
     }
 
-    public void SetArrivedState(bool state)
+    public void SetArrivedState(bool state) //sets state of orb
     {
         hasArrived = state;
     }

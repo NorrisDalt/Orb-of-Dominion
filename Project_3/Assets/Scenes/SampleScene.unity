@@ -627,7 +627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b37351798ff80149b786f4e1f1b94f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!145 &759427726
+--- !u!145 &759427730
 SpringJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2014,6 +2014,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8004640820515314824, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004640820515314824, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
       propertyPath: orbMovement
       value: 
       objectReference: {fileID: 305406803}
@@ -2023,7 +2027,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2067758336064979902, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 759427726}
+      addedObject: {fileID: 759427730}
   m_SourcePrefab: {fileID: 100100000, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
