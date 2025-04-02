@@ -16,8 +16,8 @@ public class OrbMovement : MonoBehaviour
     public Collider orbCollider;
 
     private Vector3 targetPosition; //the position the orb is moving to
-    private Transform enemyTarget = null; //for tracking the enemy
-    private bool movingToTarget = false;
+    public Transform enemyTarget = null; //for tracking the enemy
+    public bool movingToTarget = false;
     private bool hasArrived = false;
     private bool returningToPlayer = false;
 
@@ -38,7 +38,7 @@ public class OrbMovement : MonoBehaviour
         }
         else if (enemyTarget != null)
         {
-            FollowEnemy(); //tracking enemy state
+            //FollowEnemy(); //tracking enemy state
         }
         else if (returningToPlayer)
         {
@@ -77,7 +77,7 @@ public class OrbMovement : MonoBehaviour
         }
     }
 
-    void FollowEnemy() //follows current enemy target
+    public void FollowEnemy() //follows current enemy target
     {
         if (enemyTarget == null) //if enemy is already destroyed stop following
         {

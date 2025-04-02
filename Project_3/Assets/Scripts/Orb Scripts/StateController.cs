@@ -45,6 +45,16 @@ public class StateController : MonoBehaviour
             currentAbility = PlayerAbility.Tether;
             Debug.Log("Tether is active");
         }
+        if(Input.GetKeyDown(KeyCode.Alpha4))//When player clicking 3, tether ability can now be used
+        {
+            currentAbility = PlayerAbility.Homming;
+            Debug.Log("Homming is active");
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha5))//When player clicking 3, tether ability can now be used
+        {
+            currentAbility = PlayerAbility.Drain;
+            Debug.Log("Drain is active");
+        }
         //Need to add cooldowns and make other abilities turn off once currentAbility state swaps.
 
 
@@ -83,6 +93,13 @@ public class StateController : MonoBehaviour
                     portalAbility.SwapPositions();
                 }
                 break;
+            case PlayerAbility.Homming:
+                if(orbMovement.enemyTarget != null && orbMovement.movingToTarget == false)
+                {
+                        orbMovement.FollowEnemy();
+                }
+                break;
+            
                 
         }
      }

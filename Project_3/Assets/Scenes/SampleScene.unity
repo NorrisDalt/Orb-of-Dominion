@@ -405,6 +405,8 @@ MonoBehaviour:
   hoverOffset: 1.5
   returnSpeed: 10
   orbCollider: {fileID: 305406805}
+  enemyTarget: {fileID: 0}
+  movingToTarget: 0
   allEnemiesList: []
 --- !u!114 &305406804
 MonoBehaviour:
@@ -1167,6 +1169,8 @@ MonoBehaviour:
   hoverOffset: 1.5
   returnSpeed: 10
   orbCollider: {fileID: 1436802988}
+  enemyTarget: {fileID: 0}
+  movingToTarget: 0
   allEnemiesList: []
 --- !u!54 &1436802994
 Rigidbody:
@@ -1908,7 +1912,7 @@ GameObject:
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2146116110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1922,7 +1926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 9150807526203764869, guid: b2efc51311a1f2c4c9c54055b57d62cd, type: 3}
-  enemyCount: 40
+  enemyCount: 3
   spawnDelay: 0.5
   waveDelay: 1
 --- !u!114 &2146116111
