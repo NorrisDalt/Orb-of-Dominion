@@ -640,7 +640,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 200
+  m_Spring: 0
   m_Damper: 2
   m_MinDistance: 1
   m_MaxDistance: 2.65
@@ -651,6 +651,19 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &759427734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759427715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a3bea4af7c49f49977cb4d64151e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAbility: 0
 --- !u!1 &797626922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1894,7 +1907,7 @@ GameObject:
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2146116110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2024,6 +2037,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2067758336064979902, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 759427726}
+    - targetCorrespondingSourceObject: {fileID: 2067758336064979902, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 759427734}
   m_SourcePrefab: {fileID: 100100000, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -9,13 +9,13 @@ public class OrbPortal : MonoBehaviour
 
     void Update()
     {
-        if (abilityUnlocked && Input.GetKeyDown(KeyCode.Alpha1) && orbMovement.HasArrived())
+        /*if (abilityUnlocked && Input.GetKeyDown(KeyCode.Alpha1) && orbMovement.HasArrived())
         {
             SwapPositions();
-        }
+        }*/
     }
 
-    void SwapPositions()
+    public void SwapPositions()
     {
         Vector3 tempPosition = transform.position;
 

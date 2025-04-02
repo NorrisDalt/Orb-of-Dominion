@@ -14,10 +14,10 @@ public class OrbTether : MonoBehaviour
 
     public void FixedUpdate()
     {
-      TetherToggle();
+      //TetherToggle();
     }
 
-    void TetherToggle()
+    public void TetherToggle()
     {
       if(Input.GetMouseButtonDown(1))
       {
