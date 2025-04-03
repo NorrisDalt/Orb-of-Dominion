@@ -5673,12 +5673,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8590629635806464024, guid: fbfcd468fe1d97b48965f348a02b9663, type: 3}
-  projectileSpeed: 25
+  projectileSpeed: 30
   player: {fileID: 759427719}
   cameraTransform: {fileID: 2074036908}
   orbCollider: {fileID: 305406805}
   orbMovement: {fileID: 305406803}
-  fireCooldown: 3
+  fireCooldown: 1.7
 --- !u!135 &305406805
 SphereCollider:
   m_ObjectHideFlags: 0
