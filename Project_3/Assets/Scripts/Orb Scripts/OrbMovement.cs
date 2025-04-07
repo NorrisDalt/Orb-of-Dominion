@@ -38,7 +38,7 @@ public class OrbMovement : MonoBehaviour
         }
 
         // Only slash if orb is orbiting the player
-        if (Input.GetKeyDown(KeyCode.E) && !movingToTarget && !returningToPlayer && enemyTarget == null && !hasArrived && !isSlashing)
+        if (Input.GetMouseButtonDown(0) && !movingToTarget && !returningToPlayer && enemyTarget == null && !hasArrived && !isSlashing)
         {
             StartCoroutine(TripleSlash());
         }
