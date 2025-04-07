@@ -189,7 +189,7 @@ public class OrbMovement : MonoBehaviour
     {
         isSlashing = true;
 
-        float duration = 0.3f; // duration per slash
+        float duration = 0.3f; //duration per slash
         int steps = 30;
         float radius = 2f;
         float angleRange = 180f;
@@ -203,6 +203,8 @@ public class OrbMovement : MonoBehaviour
         //left to right slash
         for (int i = 0; i <= steps; i++)
         {
+            if (returningToOrbit) break;  //exit if the orb starts returning to orbit
+
             float t = (float)i / steps;
             float angle = Mathf.Lerp(-angleRange / 2, angleRange / 2, t);
 
@@ -211,12 +213,18 @@ public class OrbMovement : MonoBehaviour
             Vector3 arcPos = center + offset + Vector3.up * verticalOffset;
 
             transform.position = arcPos;
+
+            //update orbit position based on player position
+            center = player.position + forward * 1.5f;
+
             yield return new WaitForSeconds(duration / steps);
         }
 
         //right to left slash
         for (int i = 0; i <= steps; i++)
         {
+            if (returningToOrbit) break;
+
             float t = (float)i / steps;
             float angle = Mathf.Lerp(angleRange / 2, -angleRange / 2, t);
 
@@ -225,6 +233,10 @@ public class OrbMovement : MonoBehaviour
             Vector3 arcPos = center + offset + Vector3.up * verticalOffset;
 
             transform.position = arcPos;
+
+            //update orbit position based on player position
+            center = player.position + forward * 1.5f;
+
             yield return new WaitForSeconds(duration / steps);
         }
 
@@ -235,22 +247,28 @@ public class OrbMovement : MonoBehaviour
 
         Vector3 right = cameraTransform.right;
         Vector3 baseStart = player.position + forwardDir * 1.5f + Vector3.up * 0.5f; //starts in front and slightly up to avoid clipping with ground
-        Vector3 baseEnd = baseStart + Vector3.up * 2f; //ends higher for same reason
+        Vector3 baseEnd = baseStart + Vector3.up * 2f; //ends higher up so that the slash isn't too short
 
         for (int i = 0; i <= steps; i++)
         {
+            if (returningToOrbit) break;
+
             float t = (float)i / steps;
             Vector3 upwardArc = Vector3.Lerp(baseStart, baseEnd, t);
 
-            //forward curve for third slash
+            //front facing curve
             float outwardOffset = Mathf.Sin(t * Mathf.PI) * 0.75f;
             upwardArc += forwardDir * outwardOffset;
 
             transform.position = upwardArc;
+
+            //update orbit position based on player position
+            baseStart = player.position + forwardDir * 1.5f + Vector3.up * 0.5f;
+
             yield return new WaitForSeconds(duration / steps);
         }
 
-        //returns to orbiting
+        //smoothly returns to orbit
         returningToOrbit = true;
         isSlashing = false;
         hasArrived = false;
