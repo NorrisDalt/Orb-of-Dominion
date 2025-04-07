@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     public float JumpForce = 5f;
     public float GravityMultiplier = 2f;
 
+    public float pMaxHealth = 100f;
+    private float pCurrentHealth;
+
     private float _vInput;
     private float _hInput;
     private bool _isGrounded;
@@ -20,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true; //prevent Rigidbody rotation to avoid camera shake
+        pCurrentHealth = pMaxHealth;
     }
 
     void Update()
@@ -68,5 +72,20 @@ public class PlayerMovement : MonoBehaviour
         {
             _isGrounded = true;
         }
+    }
+    
+    public void TakeDamage(float dmg)
+    {
+        pCurrentHealth -= dmg;
+
+        if(pCurrentHealth <= 0)
+        {
+            PlayerDeath();
+        }
+    }
+
+    void PlayerDeath()
+    {
+        Destroy(this.gameObject);
     }
 }

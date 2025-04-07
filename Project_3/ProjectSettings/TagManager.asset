@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Orb
   - Projectile
+  - FlyingEnemy
   layers:
   - Default
   - TransparentFX

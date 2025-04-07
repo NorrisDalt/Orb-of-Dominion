@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class OrbMovement : MonoBehaviour
 {
-    private Enemy enemy;
-
     public Transform player;
     public Transform cameraTransform;
     public float orbitSpeed = 50f;
@@ -53,10 +51,6 @@ public class OrbMovement : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        enemy = GetComponent<Enemy>();
-    }
 
     void OrbitPlayer() //orbits orb around the player
     {
@@ -141,6 +135,7 @@ public class OrbMovement : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            Enemy enemy = other.GetComponent<Enemy>(); // detect enemy script on enemy
             enemy.TakeDamage(orbDamage); //destroys enemy
 
             if (other.transform == enemyTarget)
@@ -154,6 +149,18 @@ public class OrbMovement : MonoBehaviour
         {
             targetPosition = transform.position;
             movingToTarget = false;
+        }
+        else if(other.CompareTag("FlyingEnemy"))
+        {
+            FlyingEnemy flyingEnemy = other.GetComponent<FlyingEnemy>(); // detect enemy script on enemy
+            flyingEnemy.TakeDamage(orbDamage); //destroys enemy
+
+            if (other.transform == enemyTarget)
+            {
+                enemyTarget = null;
+                hasArrived = false;
+                StartReturningToPlayer(); //orb returns to player after enemy is destroyed
+            }
         }
     }
 

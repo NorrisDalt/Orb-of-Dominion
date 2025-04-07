@@ -13,6 +13,14 @@ public class FlyingEnemy : MonoBehaviour
     private float timer = 0f;    // Timer for interpolation
     public float duration = 2f; // Duration of the movement cycle
 
+    private float maxHealth = 100f;
+    private float currentHealth = 0;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+    }
+
 
     void Update()
     {
@@ -39,4 +47,21 @@ public class FlyingEnemy : MonoBehaviour
 
         agent.SetDestination(playerPos.position);
     }
+
+    public void TakeDamage(float dmg)
+    {
+        currentHealth -= dmg; 
+
+        if(currentHealth <= 0)
+        {
+            Death();
+        }
+    }
+
+    void Death()
+    {
+        Destroy(this.gameObject);
+    }
+
+    
 }

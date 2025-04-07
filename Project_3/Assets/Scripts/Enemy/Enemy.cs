@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     public GameObject bullet;
     public Transform fireLoc;
 
+    public float damage = 15;
+
     public float cooldownTime = 3f;
     private float cooldownTimer = 0f;
 
@@ -72,6 +74,15 @@ public class Enemy : MonoBehaviour
     void Death()
     {
         Destroy(this.gameObject);
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if(col.CompareTag("Player"))
+        {
+            PlayerMovement player = col.GetComponent<PlayerMovement>();
+            player.TakeDamage(damage);
+        }
     }
 
 }

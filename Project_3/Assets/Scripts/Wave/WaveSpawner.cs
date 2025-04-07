@@ -33,7 +33,7 @@ public class WaveSpawner : MonoBehaviour
                 Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)]; // Sets spawnPoint to a random point from the spawnPoints array
                 GameObject clone = Instantiate(currentWave.enemyPrefab, spawnPoint.position, spawnPoint.rotation);// Spawns at spawnPoint
                 
-                orb.allEnemiesList.Add(clone);
+                orb.allEnemiesList.Add(clone); // Adds enemy to list
 
                 yield return new WaitForSeconds(currentWave.spawnDelay);
                 Debug.Log("Total enemies added to list: " + orb.allEnemiesList.Count);

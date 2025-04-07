@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-   void OnCollisionEnter(Collision col)
+    public float bulletDamge = 10f;
+    void OnCollisionEnter(Collision col)
    {
-    if(col.gameObject.CompareTag("Player")){
-        Destroy(this.gameObject);
-    }
+        if(col.gameObject.CompareTag("Player"))
+        {
+            PlayerMovement player = col.gameObject.GetComponent<PlayerMovement>();
+            player.TakeDamage(bulletDamge);
+            Destroy(this.gameObject);
+        }
    }
     
 }
