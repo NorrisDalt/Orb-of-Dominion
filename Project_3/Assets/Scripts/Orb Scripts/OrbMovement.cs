@@ -24,6 +24,7 @@ public class OrbMovement : MonoBehaviour
     private bool hasArrived = false;
     private bool returningToPlayer = false;
     private bool isSlashing = false;
+    private bool returningToOrbit = false;
     private Vector3 slashTargetPosition;
 
     public List<GameObject> allEnemiesList = new List<GameObject>();
@@ -45,6 +46,12 @@ public class OrbMovement : MonoBehaviour
         if (isSlashing)
         {
             return; // don't update other movement while slashing
+        }
+
+        if (returningToOrbit)
+        {
+            ReturnToOrbit();
+            return;
         }
 
         if (movingToTarget)
@@ -244,8 +251,31 @@ public class OrbMovement : MonoBehaviour
         }
 
         //returns to orbiting
+        returningToOrbit = true;
         isSlashing = false;
         hasArrived = false;
+        enemyTarget = null;
+        movingToTarget = false;
+        returningToPlayer = false;
+    }
+
+    void ReturnToOrbit()
+    {
+        //figure out current orbit target based on time
+        float angle = Time.time * orbitSpeed;
+        float x = player.position.x + Mathf.Cos(angle) * orbitRadius;
+        float z = player.position.z + Mathf.Sin(angle) * orbitRadius;
+        float y = player.position.y + verticalOffset;
+        Vector3 desiredOrbitPos = new Vector3(x, y, z);
+
+        transform.position = Vector3.MoveTowards(transform.position, desiredOrbitPos, returnSpeed * Time.deltaTime);
+
+        //snap back to orbit once close enough
+        if (Vector3.Distance(transform.position, desiredOrbitPos) < 0.1f)
+        {
+            returningToOrbit = false;
+            hasArrived = false;
+        }
     }
 
     public bool HasArrived() //return whether the orb has arrived at its target
