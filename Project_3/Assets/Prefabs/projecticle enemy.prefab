@@ -134,7 +134,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -158,6 +158,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   bullet: {fileID: 734149088075498631, guid: ad58795b8e287e94f8207aaa92f3363e, type: 3}
   fireLoc: {fileID: 173169981895575570}
+  damage: 15
   cooldownTime: 1
 --- !u!54 &815041282841894579
 Rigidbody:
