@@ -13,6 +13,8 @@ public class OrbMovement : MonoBehaviour
     public float hoverOffset = 0.5f; //vertical offset so the orb doesn't stick in the ground
     public float returnSpeed = 10f; //return to player speed
     public float orbDamage = 15f;
+    public float slashDistance = 3f;
+    public float slashSpeed = 20f;
 
     public Collider orbCollider;
 
@@ -21,33 +23,45 @@ public class OrbMovement : MonoBehaviour
     public bool movingToTarget = false;
     private bool hasArrived = false;
     private bool returningToPlayer = false;
+    private bool isSlashing = false;
+    private Vector3 slashTargetPosition;
 
     public List<GameObject> allEnemiesList = new List<GameObject>();
 
     void Update()
     {
-        //"F" key to recall the orb back to the player
+        // Recall orb with F
         if (Input.GetKeyDown(KeyCode.F) && !returningToPlayer)
         {
             StartReturningToPlayer();
         }
 
-        //moves the orb based on its current state
+        // Only slash if orb is orbiting the player
+        if (Input.GetKeyDown(KeyCode.E) && !movingToTarget && !returningToPlayer && enemyTarget == null && !hasArrived && !isSlashing)
+        {
+            StartCoroutine(SlashForward());
+        }
+
+        if (isSlashing)
+        {
+            return; // don't update other movement while slashing
+        }
+
         if (movingToTarget)
         {
-            MoveToTarget(); //moving state
+            MoveToTarget();
         }
         else if (enemyTarget != null)
         {
-            //FollowEnemy(); //tracking enemy state
+            FollowEnemy();
         }
         else if (returningToPlayer)
         {
-            MoveBackToPlayer(); //return state
+            MoveBackToPlayer();
         }
         else if (!hasArrived)
         {
-            OrbitPlayer(); //orbiting state
+            OrbitPlayer();
         }
     }
 
@@ -162,6 +176,42 @@ public class OrbMovement : MonoBehaviour
                 StartReturningToPlayer(); //orb returns to player after enemy is destroyed
             }
         }
+    }
+
+    private IEnumerator SlashForward()
+    {
+        isSlashing = true;
+
+        float duration = 0.3f; //slash time
+        int steps = 30;
+        float radius = 2f; //slash radius
+        float angleRange = 180f;
+
+        //gets the center pivot of the arch in front of the player
+        Vector3 forward = cameraTransform.forward;
+        forward.y = 0;
+        forward.Normalize();
+
+        Vector3 center = player.position + forward * 1.5f;
+
+        for (int i = 0; i <= steps; i++)
+        {
+            float t = (float)i / steps;
+            float angle = Mathf.Lerp(-angleRange / 2, angleRange / 2, t);
+
+            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
+            Vector3 offset = rotation * forward * radius;
+
+            Vector3 arcPos = center + offset + Vector3.up * verticalOffset;
+
+            transform.position = arcPos;
+
+            yield return new WaitForSeconds(duration / steps);
+        }
+
+        // Return to orbiting after slash
+        isSlashing = false;
+        hasArrived = false;
     }
 
     public bool HasArrived() //return whether the orb has arrived at its target
