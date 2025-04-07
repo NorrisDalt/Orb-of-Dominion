@@ -14,12 +14,17 @@ public class Enemy : MonoBehaviour
     public float cooldownTime = 3f;
     private float cooldownTimer = 0f;
 
+    private float maxHealth = 100f;
+    private float currentHealth = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+
+        currentHealth = maxHealth;
         
     }
 
@@ -52,6 +57,21 @@ public class Enemy : MonoBehaviour
                 cooldownTimer = cooldownTime;
             }
         }
+    }
+
+    public void TakeDamage(float dmg)
+    {
+        currentHealth -= dmg; 
+
+        if(currentHealth <= 0)
+        {
+            Death();
+        }
+    }
+
+    void Death()
+    {
+        Destroy(this.gameObject);
     }
 
 }

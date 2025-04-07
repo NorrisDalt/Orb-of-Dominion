@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class OrbMovement : MonoBehaviour
 {
+    private Enemy enemy;
+
     public Transform player;
     public Transform cameraTransform;
     public float orbitSpeed = 50f;
@@ -12,6 +14,7 @@ public class OrbMovement : MonoBehaviour
     public float speedToHit = 10f; //speed the orb moves to its target
     public float hoverOffset = 0.5f; //vertical offset so the orb doesn't stick in the ground
     public float returnSpeed = 10f; //return to player speed
+    public float orbDamage = 15f;
 
     public Collider orbCollider;
 
@@ -48,6 +51,11 @@ public class OrbMovement : MonoBehaviour
         {
             OrbitPlayer(); //orbiting state
         }
+    }
+
+    void Start()
+    {
+        enemy = GetComponent<Enemy>();
     }
 
     void OrbitPlayer() //orbits orb around the player
@@ -133,7 +141,7 @@ public class OrbMovement : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Destroy(other.gameObject); //destroys enemy
+            enemy.TakeDamage(orbDamage); //destroys enemy
 
             if (other.transform == enemyTarget)
             {
