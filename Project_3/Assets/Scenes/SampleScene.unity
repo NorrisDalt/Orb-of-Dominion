@@ -5665,6 +5665,8 @@ MonoBehaviour:
   hoverOffset: 1.5
   returnSpeed: 20
   orbDamage: 15
+  slashDistance: 3
+  slashSpeed: 20
   orbCollider: {fileID: 305406805}
   enemyTarget: {fileID: 0}
   movingToTarget: 0
@@ -6865,7 +6867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1786237024052950580, guid: f6e7d44ae366c1140a8c693e808d1558, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.795044
+      value: -86.898186
       objectReference: {fileID: 0}
     - target: {fileID: 1786237024052950580, guid: f6e7d44ae366c1140a8c693e808d1558, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7354,6 +7356,8 @@ MonoBehaviour:
   hoverOffset: 1.5
   returnSpeed: 10
   orbDamage: 15
+  slashDistance: 3
+  slashSpeed: 20
   orbCollider: {fileID: 1436802988}
   enemyTarget: {fileID: 0}
   movingToTarget: 0
@@ -8149,7 +8153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3086775203350342703, guid: 821cb3d7f939cb74691000dc68d9ba9e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.417437
+      value: -79.68571
       objectReference: {fileID: 0}
     - target: {fileID: 3086775203350342703, guid: 821cb3d7f939cb74691000dc68d9ba9e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8206,7 +8210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6127599701982990892, guid: b2efc51311a1f2c4c9c54055b57d62cd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.4031436
+      value: -81.7
       objectReference: {fileID: 0}
     - target: {fileID: 6127599701982990892, guid: b2efc51311a1f2c4c9c54055b57d62cd, type: 3}
       propertyPath: m_LocalRotation.w

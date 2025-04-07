@@ -39,7 +39,7 @@ public class OrbMovement : MonoBehaviour
         // Only slash if orb is orbiting the player
         if (Input.GetKeyDown(KeyCode.E) && !movingToTarget && !returningToPlayer && enemyTarget == null && !hasArrived && !isSlashing)
         {
-            StartCoroutine(SlashForward());
+            StartCoroutine(TripleSlash());
         }
 
         if (isSlashing)
@@ -178,22 +178,22 @@ public class OrbMovement : MonoBehaviour
         }
     }
 
-    private IEnumerator SlashForward()
+    private IEnumerator TripleSlash()
     {
         isSlashing = true;
 
-        float duration = 0.3f; //slash time
+        float duration = 0.3f; // duration per slash
         int steps = 30;
-        float radius = 2f; //slash radius
+        float radius = 2f;
         float angleRange = 180f;
 
-        //gets the center pivot of the arch in front of the player
         Vector3 forward = cameraTransform.forward;
         forward.y = 0;
         forward.Normalize();
 
         Vector3 center = player.position + forward * 1.5f;
 
+        //left to right slash
         for (int i = 0; i <= steps; i++)
         {
             float t = (float)i / steps;
@@ -201,15 +201,49 @@ public class OrbMovement : MonoBehaviour
 
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
             Vector3 offset = rotation * forward * radius;
-
             Vector3 arcPos = center + offset + Vector3.up * verticalOffset;
 
             transform.position = arcPos;
-
             yield return new WaitForSeconds(duration / steps);
         }
 
-        // Return to orbiting after slash
+        //right to left slash
+        for (int i = 0; i <= steps; i++)
+        {
+            float t = (float)i / steps;
+            float angle = Mathf.Lerp(angleRange / 2, -angleRange / 2, t);
+
+            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
+            Vector3 offset = rotation * forward * radius;
+            Vector3 arcPos = center + offset + Vector3.up * verticalOffset;
+
+            transform.position = arcPos;
+            yield return new WaitForSeconds(duration / steps);
+        }
+
+        //down to up slash
+        Vector3 forwardDir = cameraTransform.forward;
+        forwardDir.y = 0;
+        forwardDir.Normalize();
+
+        Vector3 right = cameraTransform.right;
+        Vector3 baseStart = player.position + forwardDir * 1.5f + Vector3.up * 0.5f; //starts in front and slightly up to avoid clipping with ground
+        Vector3 baseEnd = baseStart + Vector3.up * 2f; //ends higher for same reason
+
+        for (int i = 0; i <= steps; i++)
+        {
+            float t = (float)i / steps;
+            Vector3 upwardArc = Vector3.Lerp(baseStart, baseEnd, t);
+
+            //forward curve for third slash
+            float outwardOffset = Mathf.Sin(t * Mathf.PI) * 0.75f;
+            upwardArc += forwardDir * outwardOffset;
+
+            transform.position = upwardArc;
+            yield return new WaitForSeconds(duration / steps);
+        }
+
+        //returns to orbiting
         isSlashing = false;
         hasArrived = false;
     }
