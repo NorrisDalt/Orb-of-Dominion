@@ -16,7 +16,7 @@ public class TrackingProjectile : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time >= lastFireTime + fireCooldown) //cooldown to prevent spamming
+        if (Input.GetKeyDown(KeyCode.E) && Time.time >= lastFireTime + fireCooldown) //cooldown to prevent spamming
         {
             ShootProjectile();
             lastFireTime = Time.time; //starts the cooldown after the first shot

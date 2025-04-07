@@ -24,6 +24,7 @@ public class OrbMovement : MonoBehaviour
     private bool hasArrived = false;
     private bool returningToPlayer = false;
     private bool isSlashing = false;
+    private bool returningToOrbit = false;
     private Vector3 slashTargetPosition;
 
     public List<GameObject> allEnemiesList = new List<GameObject>();
@@ -37,14 +38,20 @@ public class OrbMovement : MonoBehaviour
         }
 
         // Only slash if orb is orbiting the player
-        if (Input.GetKeyDown(KeyCode.E) && !movingToTarget && !returningToPlayer && enemyTarget == null && !hasArrived && !isSlashing)
+        if (Input.GetMouseButtonDown(0) && !movingToTarget && !returningToPlayer && enemyTarget == null && !hasArrived && !isSlashing)
         {
-            StartCoroutine(SlashForward());
+            StartCoroutine(TripleSlash());
         }
 
         if (isSlashing)
         {
             return; // don't update other movement while slashing
+        }
+
+        if (returningToOrbit)
+        {
+            ReturnToOrbit();
+            return;
         }
 
         if (movingToTarget)
@@ -178,40 +185,115 @@ public class OrbMovement : MonoBehaviour
         }
     }
 
-    private IEnumerator SlashForward()
+    private IEnumerator TripleSlash()
     {
         isSlashing = true;
 
-        float duration = 0.3f; //slash time
+        float duration = 0.3f; //duration per slash
         int steps = 30;
-        float radius = 2f; //slash radius
+        float radius = 2f;
         float angleRange = 180f;
 
-        //gets the center pivot of the arch in front of the player
         Vector3 forward = cameraTransform.forward;
         forward.y = 0;
         forward.Normalize();
 
         Vector3 center = player.position + forward * 1.5f;
 
+        //left to right slash
         for (int i = 0; i <= steps; i++)
         {
+            if (returningToOrbit) break;  //exit if the orb starts returning to orbit
+
             float t = (float)i / steps;
             float angle = Mathf.Lerp(-angleRange / 2, angleRange / 2, t);
 
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
             Vector3 offset = rotation * forward * radius;
-
             Vector3 arcPos = center + offset + Vector3.up * verticalOffset;
 
             transform.position = arcPos;
 
+            //update orbit position based on player position
+            center = player.position + forward * 1.5f;
+
             yield return new WaitForSeconds(duration / steps);
         }
 
-        // Return to orbiting after slash
+        //right to left slash
+        for (int i = 0; i <= steps; i++)
+        {
+            if (returningToOrbit) break;
+
+            float t = (float)i / steps;
+            float angle = Mathf.Lerp(angleRange / 2, -angleRange / 2, t);
+
+            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
+            Vector3 offset = rotation * forward * radius;
+            Vector3 arcPos = center + offset + Vector3.up * verticalOffset;
+
+            transform.position = arcPos;
+
+            //update orbit position based on player position
+            center = player.position + forward * 1.5f;
+
+            yield return new WaitForSeconds(duration / steps);
+        }
+
+        //down to up slash
+        Vector3 forwardDir = cameraTransform.forward;
+        forwardDir.y = 0;
+        forwardDir.Normalize();
+
+        Vector3 right = cameraTransform.right;
+        Vector3 baseStart = player.position + forwardDir * 1.5f + Vector3.up * 0.5f; //starts in front and slightly up to avoid clipping with ground
+        Vector3 baseEnd = baseStart + Vector3.up * 2f; //ends higher up so that the slash isn't too short
+
+        for (int i = 0; i <= steps; i++)
+        {
+            if (returningToOrbit) break;
+
+            float t = (float)i / steps;
+            Vector3 upwardArc = Vector3.Lerp(baseStart, baseEnd, t);
+
+            //front facing curve
+            float outwardOffset = Mathf.Sin(t * Mathf.PI) * 0.75f;
+            upwardArc += forwardDir * outwardOffset;
+
+            transform.position = upwardArc;
+
+            //update orbit position based on player position
+            baseStart = player.position + forwardDir * 1.5f + Vector3.up * 0.5f;
+
+            yield return new WaitForSeconds(duration / steps);
+        }
+
+        //smoothly returns to orbit
+        returningToOrbit = true;
         isSlashing = false;
         hasArrived = false;
+        enemyTarget = null;
+        movingToTarget = false;
+        returningToPlayer = false;
+    }
+
+    void ReturnToOrbit()
+    {
+        //figure out current orbit target based on time
+        float angle = Time.time * orbitSpeed;
+        float x = player.position.x + Mathf.Cos(angle) * orbitRadius;
+        float z = player.position.z + Mathf.Sin(angle) * orbitRadius;
+        float y = player.position.y + verticalOffset;
+        Vector3 desiredOrbitPos = new Vector3(x, y, z);
+
+        transform.position = Vector3.MoveTowards(transform.position, desiredOrbitPos, returnSpeed * Time.deltaTime);
+
+        //snap back to orbit once close enough
+        if (Vector3.Distance(transform.position, desiredOrbitPos) < 0.1f)
+        {
+            returningToOrbit = false;
+            hasArrived = false;
+        }
     }
 
     public bool HasArrived() //return whether the orb has arrived at its target
