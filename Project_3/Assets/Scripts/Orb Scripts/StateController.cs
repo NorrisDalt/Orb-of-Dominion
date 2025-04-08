@@ -16,7 +16,7 @@ public class StateController : MonoBehaviour
 
     // Settings
     public float cooldownDuration = 5f;
-    [SerializeField] private PlayerAbility currentAbility = PlayerAbility.None;
+    [SerializeField] public PlayerAbility currentAbility = PlayerAbility.None;
 
     public enum PlayerAbility
     {   

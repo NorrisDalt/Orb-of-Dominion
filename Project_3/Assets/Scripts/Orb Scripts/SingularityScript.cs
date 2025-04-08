@@ -5,9 +5,13 @@ using UnityEngine;
 public class SingularityScript : MonoBehaviour
 {
     public Rigidbody rb;
+    private StateController state;
 
     public float G = 6.674f;
-
+    void Awake()
+    {
+        state = FindObjectOfType<StateController>();
+    }
     void FixedUpdate()
     {
         Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
@@ -15,6 +19,11 @@ public class SingularityScript : MonoBehaviour
         {
             Attract(enemy);
         }
+        if(state.currentAbility != StateController.PlayerAbility.Singularity)
+        {
+                enabled = false;
+        }
+
     }
 
    void Attract(Enemy objToAttract)
