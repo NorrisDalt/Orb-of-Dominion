@@ -129,6 +129,7 @@ MonoBehaviour:
   fireLoc: {fileID: 0}
   damage: 15
   cooldownTime: 3
+  iFrameDuration: 1
 --- !u!195 &6604067696914209304
 NavMeshAgent:
   m_ObjectHideFlags: 0

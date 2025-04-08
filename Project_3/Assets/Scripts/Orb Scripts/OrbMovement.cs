@@ -185,6 +185,37 @@ public class OrbMovement : MonoBehaviour
         }
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Enemy enemy = other.GetComponent<Enemy>(); // detect enemy script on enemy
+            enemy.TakeDamage(orbDamage); //destroys enemy
+
+            if (other.transform == enemyTarget)
+            {
+                enemyTarget = null;
+                hasArrived = false;
+                StartReturningToPlayer(); //orb returns to player after enemy is destroyed
+            }
+        }
+        else if(other.CompareTag("FlyingEnemy"))
+        {
+            FlyingEnemy flyingEnemy = other.GetComponent<FlyingEnemy>(); // detect enemy script on enemy
+            flyingEnemy.TakeDamage(orbDamage); //destroys enemy
+
+            if (other.transform == enemyTarget)
+            {
+                enemyTarget = null;
+                hasArrived = false;
+                StartReturningToPlayer(); //orb returns to player after enemy is destroyed
+            }
+        }
+    }
+    //Tweak onTriggerStay, add couroutine, every .8 seconds, deal damage.
+
+
+
     private IEnumerator TripleSlash()
     {
         isSlashing = true;

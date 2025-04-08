@@ -19,6 +19,13 @@ public class Enemy : MonoBehaviour
     private float maxHealth = 100f;
     private float currentHealth = 0;
 
+    //Invincible frames
+    public float iFrameDuration;
+    private float iFrameTimer;
+    private bool isInvincible;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +47,17 @@ public class Enemy : MonoBehaviour
         {
             cooldownTimer -= Time.deltaTime;
         }
+
+        if(iFrameTimer > 0)
+        {
+            iFrameTimer -= Time.deltaTime;
+        }
+        //If the Invinciblity timer reaches 0 , set invinsiblity bool to false
+        else if(isInvincible)
+        {
+            isInvincible = false;
+        }
+
     }
 
     void TypeOfAgent()
@@ -63,8 +81,19 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        currentHealth -= dmg; 
+        if(!isInvincible)
+        {
+            currentHealth -= dmg; 
 
+            iFrameTimer = iFrameDuration;
+            isInvincible = true;
+
+            if(currentHealth <= 0)
+            {
+                Death();
+            }
+        }
+        
         if(currentHealth <= 0)
         {
             Death();
