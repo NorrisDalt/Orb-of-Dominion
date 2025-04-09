@@ -4,19 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
   - Ground
-  - Orb
-  - Projectile
-  - FlyingEnemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - EnemyBullet
+  - 
   - 
   - 
   - 
