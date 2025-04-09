@@ -10,6 +10,9 @@ public class Enemy : MonoBehaviour
     public Rigidbody rb;
     public GameObject bullet;
     public Transform fireLoc;
+    private AudioSource audioSource;
+
+    public AudioClip audioClip;
 
     public float damage = 15;
 
@@ -24,6 +27,8 @@ public class Enemy : MonoBehaviour
     private float iFrameTimer;
     private bool isInvincible;
 
+    private bool isPlayingSound = false;
+
 
 
     // Start is called before the first frame update
@@ -32,6 +37,7 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
 
         currentHealth = maxHealth;
         
@@ -42,6 +48,17 @@ public class Enemy : MonoBehaviour
     {
         agent.SetDestination(playerPos.position);
         TypeOfAgent();
+        // Play walking sound if moving
+        if (agent.velocity.magnitude > 0.1f && !isPlayingSound)
+        {
+            audioSource.PlayOneShot(audioClip);
+            isPlayingSound = true;
+        }
+        else if (agent.velocity.magnitude <= 0.1f)
+        {
+            isPlayingSound = false;
+        }
+
 
         if(cooldownTimer > 0)
         {

@@ -159,6 +159,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   bullet: {fileID: 734149088075498631, guid: ad58795b8e287e94f8207aaa92f3363e, type: 3}
   fireLoc: {fileID: 173169981895575570}
+  audioClip: {fileID: 0}
   damage: 15
   cooldownTime: 1
   currentHealth: 0
