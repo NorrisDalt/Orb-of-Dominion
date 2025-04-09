@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Wave : MonoBehaviour
 {
-    public GameObject enemyPrefab;
     public int enemyCount;
     public float spawnDelay;
     public float waveDelay;

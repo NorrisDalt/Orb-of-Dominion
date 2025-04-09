@@ -19,29 +19,26 @@ public class StateController : MonoBehaviour
     private OrbPortal portalAbility;
     public SingularityScript singularityAbility;
     private OrbMovement orbMovement;
-    private OrbDrain orbDrain;
 
     // Settings
     [Header("Settings")]
     public float cooldownDuration = 5f;
-    public PlayerAbility currentAbility { get; private set; } = PlayerAbility.None;
 
     // Game State
     private Dictionary<PlayerAbility, float> cooldowns = new Dictionary<PlayerAbility, float>();
     private int currentLevel = 1;
-    private PlayerAbility[] selectedAbilities = new PlayerAbility[3];
+    private Dictionary<KeyCode, PlayerAbility> abilityHotkeys = new Dictionary<KeyCode, PlayerAbility>();
+    private PlayerAbility currentlySelectedAbility = PlayerAbility.None;
     private bool hasSelectedAbility = false;
-    
 
     public enum PlayerAbility
     {   
         None = 0,
-        True = 1,
-        Tether = 2,
-        Portal = 3,
-        Homming = 4,
-        Singularity = 5,
-        Drain = 6
+        Tether = 1,
+        Portal = 2,
+        Homming = 3,
+        Singularity = 4,
+        Drain = 5
     }
 
     void Start()
@@ -54,9 +51,13 @@ public class StateController : MonoBehaviour
     {
         if (!hasSelectedAbility) return;
         
-        HandleAbilitySwitching();
+        CheckHotkeyPresses();
         UpdateCooldowns();
-        ActivateAbility();
+        
+        if (Input.GetMouseButtonDown(1)) // Right-click activation
+        {
+            ActivateCurrentAbility();
+        }
     }
 
     #region Initialization
@@ -65,32 +66,117 @@ public class StateController : MonoBehaviour
         tetherAbility = GetComponent<OrbTether>();
         portalAbility = GetComponent<OrbPortal>();
         orbMovement = FindObjectOfType<OrbMovement>();
-        orbDrain = GetComponent<OrbDrain>();
 
         foreach (Image ui in abilityUI)
         {
             ui.enabled = false;
         }
         abilitySelectionPanel.SetActive(false);
+
+        // Ensure EventSystem exists
+        if (FindObjectOfType<EventSystem>() == null)
+        {
+            GameObject obj = new GameObject("EventSystem");
+            obj.AddComponent<EventSystem>();
+            obj.AddComponent<StandaloneInputModule>();
+        }
+    }
+    #endregion
+
+    #region Hotkey System
+    private void CheckHotkeyPresses()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && abilityHotkeys.ContainsKey(KeyCode.Alpha1))
+        {
+            SelectAbility(abilityHotkeys[KeyCode.Alpha1]);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && abilityHotkeys.ContainsKey(KeyCode.Alpha2))
+        {
+            SelectAbility(abilityHotkeys[KeyCode.Alpha2]);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && abilityHotkeys.ContainsKey(KeyCode.Alpha3))
+        {
+            SelectAbility(abilityHotkeys[KeyCode.Alpha3]);
+        }
+    }
+
+    private void SelectAbility(PlayerAbility ability)
+    {
+        // Disable all abilities first
+        if (singularityAbility != null) singularityAbility.enabled = false;
+        if (portalAbility != null) portalAbility.enabled = false;
+        if (tetherAbility != null) tetherAbility.enabled = false;
+
+        currentlySelectedAbility = ability;
+        UpdateAbilityUI();
+    }
+
+    private void UpdateAbilityUI()
+    {
+        // Disable all UI first
+        foreach (Image ui in abilityUI)
+        {
+            if (ui != null) ui.enabled = false;
+        }
+
+        // Enable only the selected ability's UI
+        switch (currentlySelectedAbility)
+        {
+            case PlayerAbility.Singularity:
+                if (abilityUI.Length > 0 && abilityUI[0] != null) abilityUI[0].enabled = true;
+                break;
+            case PlayerAbility.Portal:
+                if (abilityUI.Length > 1 && abilityUI[1] != null) abilityUI[1].enabled = true;
+                break;
+            case PlayerAbility.Tether:
+                if (abilityUI.Length > 2 && abilityUI[2] != null) abilityUI[2].enabled = true;
+                break;
+        }
+    }
+
+    private void ActivateCurrentAbility()
+    {
+        if (currentlySelectedAbility == PlayerAbility.None) return;
+
+        switch (currentlySelectedAbility)
+        {
+            case PlayerAbility.Singularity:
+                if (!IsAbilityOnCooldown(PlayerAbility.Singularity) && singularityAbility != null)
+                {
+                    singularityAbility.enabled = !singularityAbility.enabled;
+                    cooldowns[PlayerAbility.Singularity] = cooldownDuration;
+                }
+                break;
+
+            case PlayerAbility.Portal:
+                if (!IsAbilityOnCooldown(PlayerAbility.Portal) && orbMovement != null && orbMovement.HasArrived() && portalAbility != null)
+                {
+                    portalAbility.SwapPositions();
+                    cooldowns[PlayerAbility.Portal] = cooldownDuration;
+                }
+                break;
+
+            case PlayerAbility.Tether:
+                if (!IsAbilityOnCooldown(PlayerAbility.Tether) && tetherAbility != null)
+                {
+                    tetherAbility.TetherToggle();
+                }
+                break;
+        }
     }
     #endregion
 
     #region Level Progression
     public void StartLevel()
     {
-        currentAbility = PlayerAbility.None;
         hasSelectedAbility = false;
         
-        if (currentLevel <= 3 && selectedAbilities[currentLevel - 1] != PlayerAbility.None)
+        if (currentLevel == 1)
         {
-            currentAbility = selectedAbilities[currentLevel - 1];
-            ActivateSelectedAbility();
-            hasSelectedAbility = true;
+            abilityHotkeys.Clear();
         }
-        else
-        {
-            ShowAbilitySelection();
-        }
+
+        ShowAbilitySelection();
     }
 
     public void AdvanceToNextLevel()
@@ -103,7 +189,6 @@ public class StateController : MonoBehaviour
         else
         {
             Debug.Log("Game completed!");
-            // Handle game completion
         }
     }
     #endregion
@@ -111,24 +196,22 @@ public class StateController : MonoBehaviour
     #region Ability Selection
     private void ShowAbilitySelection()
     {
-        // Unlock and show mouse cursor
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
-        EventSystem.current.SetSelectedGameObject(null);
-        abilitySelectionButtons[0].Select();
-
         Time.timeScale = 0f;
         abilitySelectionPanel.SetActive(true);
-        
+
         List<PlayerAbility> randomAbilities = GetRandomAbilities(3);
         
         for (int i = 0; i < abilitySelectionButtons.Length; i++)
         {
             bool shouldEnable = i < randomAbilities.Count;
-            abilitySelectionButtons[i].gameObject.SetActive(shouldEnable);
+            if (abilitySelectionButtons[i] != null)
+            {
+                abilitySelectionButtons[i].gameObject.SetActive(shouldEnable);
+            }
 
-            if (shouldEnable)
+            if (shouldEnable && abilitySelectionButtons[i] != null && i < abilityButtonTexts.Length && abilityButtonTexts[i] != null)
             {
                 PlayerAbility ability = randomAbilities[i];
                 abilityButtonTexts[i].text = GetAbilityName(ability);
@@ -137,6 +220,30 @@ public class StateController : MonoBehaviour
                 abilitySelectionButtons[i].onClick.AddListener(() => OnAbilitySelected(ability));
             }
         }
+    }
+
+    private void OnAbilitySelected(PlayerAbility selectedAbility)
+    {
+        // Assign to hotkey based on level
+        KeyCode hotkey = KeyCode.Alpha1;
+        if (currentLevel == 2) hotkey = KeyCode.Alpha2;
+        else if (currentLevel == 3) hotkey = KeyCode.Alpha3;
+
+        abilityHotkeys[hotkey] = selectedAbility;
+        Debug.Log($"Assigned {selectedAbility} to {hotkey}");
+
+        // Auto-select if first ability
+        if (currentLevel == 1)
+        {
+            SelectAbility(selectedAbility);
+        }
+
+        // Clean up
+        abilitySelectionPanel.SetActive(false);
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        hasSelectedAbility = true;
     }
 
     private List<PlayerAbility> GetRandomAbilities(int count)
@@ -151,9 +258,9 @@ public class StateController : MonoBehaviour
         };
 
         // Remove already selected abilities
-        for (int i = 0; i < currentLevel - 1; i++)
+        foreach (KeyValuePair<KeyCode, PlayerAbility> pair in abilityHotkeys)
         {
-            availableAbilities.Remove(selectedAbilities[i]);
+            availableAbilities.Remove(pair.Value);
         }
 
         // Fisher-Yates shuffle
@@ -168,20 +275,6 @@ public class StateController : MonoBehaviour
         return availableAbilities.GetRange(0, Mathf.Min(count, availableAbilities.Count));
     }
 
-    private void OnAbilitySelected(PlayerAbility selectedAbility)
-    {
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        selectedAbilities[currentLevel - 1] = selectedAbility;
-        abilitySelectionPanel.SetActive(false);
-        Time.timeScale = 1f;
-        currentAbility = selectedAbility;
-        hasSelectedAbility = true;
-        ActivateSelectedAbility();
-    }
-
     private string GetAbilityName(PlayerAbility ability)
     {
         return ability switch
@@ -193,88 +286,6 @@ public class StateController : MonoBehaviour
             PlayerAbility.Drain => "Drain",
             _ => ability.ToString()
         };
-    }
-    #endregion
-
-    #region Ability Management
-    private void ActivateSelectedAbility()
-    {
-        foreach (Image ui in abilityUI) ui.enabled = false;
-
-        switch (currentAbility)
-        {
-            case PlayerAbility.Portal:
-                SetCurrentAbility(PlayerAbility.Portal, 0);
-                break;
-            case PlayerAbility.Singularity:
-                SetCurrentAbility(PlayerAbility.Singularity, 1);
-                break;
-            case PlayerAbility.Tether:
-                SetCurrentAbility(PlayerAbility.Tether, 2);
-                break;
-            case PlayerAbility.Homming:
-                SetCurrentAbility(PlayerAbility.Homming, 3);
-                break;
-            case PlayerAbility.Drain:
-                SetCurrentAbility(PlayerAbility.Drain, -1);
-                break;
-        }
-    }
-
-    private void SetCurrentAbility(PlayerAbility ability, int uiIndex)
-    {
-        if (uiIndex >= 0 && uiIndex < abilityUI.Length)
-        {
-            abilityUI[uiIndex].enabled = true;
-        }
-        currentAbility = ability;
-        Debug.Log($"{ability} activated for Level {currentLevel}");
-    }
-    #endregion
-
-    #region Ability Activation
-    private void HandleAbilitySwitching()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) SetCurrentAbility(PlayerAbility.Portal, 0);
-        else if (Input.GetKeyDown(KeyCode.Alpha2)) SetCurrentAbility(PlayerAbility.Singularity, 1);
-        else if (Input.GetKeyDown(KeyCode.Alpha3)) SetCurrentAbility(PlayerAbility.Tether, 2);
-        else if (Input.GetKeyDown(KeyCode.Alpha4)) SetCurrentAbility(PlayerAbility.Homming, 3);
-        else if (Input.GetKeyDown(KeyCode.Alpha5)) SetCurrentAbility(PlayerAbility.Drain, -1);
-    }
-
-    private void ActivateAbility()
-    {
-        if (!Input.GetMouseButtonDown(1)) return;
-
-        switch (currentAbility)
-        {
-            case PlayerAbility.Singularity:
-                if (!IsAbilityOnCooldown(PlayerAbility.Singularity))
-                {
-                    singularityAbility.enabled = !singularityAbility.enabled;
-                    cooldowns[PlayerAbility.Singularity] = cooldownDuration;
-                }
-                break;
-
-            case PlayerAbility.Tether:
-                tetherAbility.TetherToggle();
-                break;
-
-            case PlayerAbility.Portal:
-                if (orbMovement.HasArrived() && !IsAbilityOnCooldown(PlayerAbility.Portal))
-                {
-                    portalAbility.SwapPositions();
-                    cooldowns[PlayerAbility.Portal] = cooldownDuration;
-                }
-                break;
-
-            case PlayerAbility.Homming:
-                if (orbMovement.enemyTarget != null && !orbMovement.movingToTarget)
-                {
-                    orbMovement.FollowEnemy();
-                }
-                break;
-        }
     }
     #endregion
 
@@ -302,8 +313,15 @@ public class StateController : MonoBehaviour
         };
     }
     #endregion
-    public void DebugClick()
-{
-    Debug.Log("Button clicked!");
-}
+
+    #region Debug
+    void OnGUI()
+    {
+        GUILayout.Label($"Level: {currentLevel}");
+        foreach (var pair in abilityHotkeys)
+        {
+            GUILayout.Label($"{pair.Key}: {pair.Value} {(currentlySelectedAbility == pair.Value ? "(ACTIVE)" : "")}");
+        }
+    }
+    #endregion
 }

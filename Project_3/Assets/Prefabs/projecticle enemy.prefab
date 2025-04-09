@@ -160,7 +160,8 @@ MonoBehaviour:
   fireLoc: {fileID: 173169981895575570}
   damage: 15
   cooldownTime: 1
-  iFrameDuration: 1
+  currentHealth: 0
+  iFrameDuration: 1.5
 --- !u!54 &815041282841894579
 Rigidbody:
   m_ObjectHideFlags: 0

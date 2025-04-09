@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public TempPlayerDmg temp;
     public OrbMovement orb;
-
     public Wave[] waves;
     public Transform[] spawnPoints;
+    public GameObject[] enemyPrefabs; // Add this array for different enemy types
 
     private int currentWaveIndex = 0;
+    public bool cleared = false;
     
     void Start()
     {
-        //temp = GetComponent<TempPlayerDmg>();
         StartCoroutine(SpawnWaves());
     }
 
@@ -27,13 +26,15 @@ public class WaveSpawner : MonoBehaviour
 
             int enemyCount = currentWave.GetEnemyCount(currentWaveIndex);
 
-
             for(int i = 0; i < enemyCount; i++)
             {
-                Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)]; // Sets spawnPoint to a random point from the spawnPoints array
-                GameObject clone = Instantiate(currentWave.enemyPrefab, spawnPoint.position, spawnPoint.rotation);// Spawns at spawnPoint
+                Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
                 
-                orb.allEnemiesList.Add(clone); // Adds enemy to list
+                // Randomly select an enemy prefab from the array
+                GameObject randomEnemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+                GameObject clone = Instantiate(randomEnemyPrefab, spawnPoint.position, spawnPoint.rotation);
+                
+                orb.allEnemiesList.Add(clone);
 
                 yield return new WaitForSeconds(currentWave.spawnDelay);
                 Debug.Log("Total enemies added to list: " + orb.allEnemiesList.Count);
@@ -41,17 +42,13 @@ public class WaveSpawner : MonoBehaviour
 
             while(orb.allEnemiesList.Count > 0)
             {
+                orb.allEnemiesList.RemoveAll(enemy => enemy == null);
                 yield return null;
             }
 
             currentWaveIndex++;
-            //yield return new WaitForSeconds(currentWave.waveDelay);
-
-
         }
         Debug.Log("All waves completed!");
+        cleared = true;
     }
-
-
-   
 }

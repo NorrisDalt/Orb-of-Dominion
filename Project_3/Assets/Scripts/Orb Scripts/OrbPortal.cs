@@ -9,10 +9,10 @@ public class OrbPortal : MonoBehaviour
 
     void Update()
     {
-        /*if (abilityUnlocked && Input.GetKeyDown(KeyCode.Alpha1) && orbMovement.HasArrived())
+        if (abilityUnlocked && Input.GetKeyDown(KeyCode.Alpha1) && orbMovement.HasArrived())
         {
             SwapPositions();
-        }*/
+        }
     }
 
     public void SwapPositions()
