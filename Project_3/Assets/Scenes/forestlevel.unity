@@ -1440,7 +1440,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.4, y: 0.21821205}
   m_AnchorMax: {x: 0.5975001, y: 0.34}
-  m_AnchoredPosition: {x: 1, y: -1.4999847}
+  m_AnchoredPosition: {x: 1, y: -1.5}
   m_SizeDelta: {x: 2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &367573870
@@ -39871,6 +39871,63 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2047171764}
   m_SourcePrefab: {fileID: 100100000, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
+--- !u!1001 &6033962853951864773
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4683909336857327169, guid: 634b009004b27f44c842dd815b76497e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.9918036
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683909336857327169, guid: 634b009004b27f44c842dd815b76497e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.901
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683909336857327169, guid: 634b009004b27f44c842dd815b76497e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18.388948
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683909336857327169, guid: 634b009004b27f44c842dd815b76497e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683909336857327169, guid: 634b009004b27f44c842dd815b76497e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683909336857327169, guid: 634b009004b27f44c842dd815b76497e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683909336857327169, guid: 634b009004b27f44c842dd815b76497e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683909336857327169, guid: 634b009004b27f44c842dd815b76497e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683909336857327169, guid: 634b009004b27f44c842dd815b76497e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683909336857327169, guid: 634b009004b27f44c842dd815b76497e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5353449638826634491, guid: 634b009004b27f44c842dd815b76497e, type: 3}
+      propertyPath: m_Name
+      value: WitchEnemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 634b009004b27f44c842dd815b76497e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -39892,3 +39949,4 @@ SceneRoots:
   - {fileID: 1718604030}
   - {fileID: 128091335}
   - {fileID: 1675671395}
+  - {fileID: 6033962853951864773}
