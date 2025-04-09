@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float GravityMultiplier = 2f;
 
     public float pMaxHealth = 100f;
-    private float pCurrentHealth;
+    public float pCurrentHealth;
 
     private float _vInput;
     private float _hInput;
