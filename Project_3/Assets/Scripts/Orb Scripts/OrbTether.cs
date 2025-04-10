@@ -29,7 +29,7 @@ public class OrbTether : MonoBehaviour
       }
       else
       {
-        springJoint.spring = 200f;
+        springJoint.spring = 50f;
         springJoint.damper = 2f;
         isTethered = true;
         Debug.Log("IsTethered");

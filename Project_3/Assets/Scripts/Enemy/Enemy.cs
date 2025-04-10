@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     public float cooldownTime = 3f;
     private float cooldownTimer = 0f;
 
-    private float maxHealth = 100f;
+    private float maxHealth = 1000f;
     public float currentHealth = 0;
 
     //Invincible frames
