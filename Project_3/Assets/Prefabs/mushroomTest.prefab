@@ -65,6 +65,10 @@ PrefabInstance:
       value: mushroomTest
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 580defcc4cbb46f45afad3a091cee1be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 580defcc4cbb46f45afad3a091cee1be, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -158,6 +162,9 @@ MonoBehaviour:
   bullet: {fileID: 0}
   fireLoc: {fileID: 0}
   audioClip: {fileID: 8300000, guid: 14cd466250b7faf44a38d0cd9a899eaf, type: 3}
+  damageSound: {fileID: 8300000, guid: a383576debb36674e9c765b315824b82, type: 3}
+  damageEffect: {fileID: 7677299949951987052, guid: c8225ae3aca7fd449adc23911072a473, type: 3}
+  damageTextPrefab: {fileID: 0}
   damage: 15
   cooldownTime: 3
   currentHealth: 0

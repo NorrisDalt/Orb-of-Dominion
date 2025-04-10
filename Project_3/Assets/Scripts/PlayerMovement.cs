@@ -13,6 +13,11 @@ public class PlayerMovement : MonoBehaviour
     public float pMaxHealth = 100f;
     public float pCurrentHealth;
 
+    //Invincible frames
+    public float iFrameDuration;
+    private float iFrameTimer;
+    private bool isInvincible;
+
     private float _vInput;
     private float _hInput;
     private bool _isGrounded;
@@ -34,7 +39,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        if(iFrameTimer > 0)
+        {
+            iFrameTimer -= Time.deltaTime;
+        }
+        else if(isInvincible)
+        {
+            isInvincible = false;
+        }
+
         //the vertical and horizontal input values
         _vInput = Input.GetAxis("Vertical") * MoveSpeed;
         _hInput = Input.GetAxis("Horizontal") * MoveSpeed;
@@ -86,13 +100,16 @@ public class PlayerMovement : MonoBehaviour
     
     public void TakeDamage(float dmg)
     {
-        pCurrentHealth -= dmg;
-
-        slider.value = pCurrentHealth;
-
-        if(pCurrentHealth <= 0)
+        if(!isInvincible)
         {
-            PlayerDeath();
+             pCurrentHealth -= dmg;
+
+            slider.value = pCurrentHealth;
+
+            if(pCurrentHealth <= 0)
+            {
+                PlayerDeath();
+            }
         }
     }
 
