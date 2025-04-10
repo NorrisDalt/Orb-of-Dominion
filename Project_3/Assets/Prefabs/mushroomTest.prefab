@@ -161,7 +161,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   bullet: {fileID: 0}
   fireLoc: {fileID: 0}
-  audioClip: {fileID: 8300000, guid: 14cd466250b7faf44a38d0cd9a899eaf, type: 3}
+  audioClip: {fileID: 0}
   damageSound: {fileID: 8300000, guid: a383576debb36674e9c765b315824b82, type: 3}
   damageEffect: {fileID: 7677299949951987052, guid: c8225ae3aca7fd449adc23911072a473, type: 3}
   damageTextPrefab: {fileID: 0}
@@ -206,8 +206,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.45
-  m_Speed: 3.5
-  m_Acceleration: 4
+  m_Speed: 6.5
+  m_Acceleration: 6.5
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -228,11 +228,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 14cd466250b7faf44a38d0cd9a899eaf, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a383576debb36674e9c765b315824b82, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.044
+  m_Volume: 0.445
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

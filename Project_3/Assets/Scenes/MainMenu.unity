@@ -1711,7 +1711,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Title
+  m_text: Orb of Dominion
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 73f0c879b82134d499df613ecd3ff42d, type: 2}
   m_sharedMaterial: {fileID: 7383431324438336699, guid: 73f0c879b82134d499df613ecd3ff42d, type: 2}
@@ -1738,8 +1738,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 210
-  m_fontSizeBase: 210
+  m_fontSize: 199.78
+  m_fontSizeBase: 199.78
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

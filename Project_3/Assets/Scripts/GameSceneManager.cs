@@ -22,7 +22,7 @@ public class GameSceneManager : MonoBehaviour
     {
         if(wave.cleared == true)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
     }
 }
