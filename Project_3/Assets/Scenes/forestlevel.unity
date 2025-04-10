@@ -4435,6 +4435,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1476144341910751242, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: singularityAbility
+      value: 
+      objectReference: {fileID: 2047171765}
+    - target: {fileID: 1476144341910751242, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: abilityUI.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476144341910751242, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: abilitySelectionPanel
+      value: 
+      objectReference: {fileID: 991682979}
+    - target: {fileID: 1476144341910751242, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: abilityButtonTexts.Array.data[0]
+      value: 
+      objectReference: {fileID: 1181972540}
+    - target: {fileID: 1476144341910751242, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: abilityButtonTexts.Array.data[1]
+      value: 
+      objectReference: {fileID: 1686709761}
+    - target: {fileID: 1476144341910751242, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: abilityButtonTexts.Array.data[2]
+      value: 
+      objectReference: {fileID: 1577190325}
+    - target: {fileID: 1476144341910751242, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: abilitySelectionButtons.Array.data[0]
+      value: 
+      objectReference: {fileID: 370182213}
+    - target: {fileID: 1476144341910751242, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: abilitySelectionButtons.Array.data[1]
+      value: 
+      objectReference: {fileID: 136506648}
+    - target: {fileID: 1476144341910751242, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: abilitySelectionButtons.Array.data[2]
+      value: 
+      objectReference: {fileID: 367573870}
     - target: {fileID: 2067758336064979902, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5251,7 +5287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &991682980
 RectTransform:
   m_ObjectHideFlags: 0
@@ -41407,7 +41443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.819998
+      value: -2.78
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       propertyPath: m_LocalPosition.y
@@ -41415,7 +41451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.9999995
+      value: 1.71
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       propertyPath: m_LocalRotation.w
