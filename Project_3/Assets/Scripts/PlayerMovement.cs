@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Slider slider;
 
+    public Animator animator;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -36,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
         //the vertical and horizontal input values
         _vInput = Input.GetAxis("Vertical") * MoveSpeed;
         _hInput = Input.GetAxis("Horizontal") * MoveSpeed;
+
+        bool isMoving = _vInput != 0 || _hInput != 0;
+        animator.SetBool("isWalking", isMoving);
 
         //jumping
         if (Input.GetButtonDown("Jump") && _isGrounded)
