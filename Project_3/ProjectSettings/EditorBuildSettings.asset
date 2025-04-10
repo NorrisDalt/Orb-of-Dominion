@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/forestlevel.unity
     guid: 96234fd6821d9494e82d09c31a267847
+  - enabled: 1
+    path: Assets/Scenes/YouWin.unity
+    guid: 9b1b409dbc564d4408ea417b227b1e6f
   m_configObjects: {}
