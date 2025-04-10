@@ -3526,6 +3526,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746180395}
   m_CullTransparentMesh: 1
+--- !u!1 &757184461 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f7a3a4060c8920748a1772651c77b136, type: 3}
+  m_PrefabInstance: {fileID: 1861911487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &757184462
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757184461}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dde4ac987cdb4a942b0450709a3ce05b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &769373572
 GameObject:
   m_ObjectHideFlags: 0
@@ -4050,6 +4076,10 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 1861410303}
+    - target: {fileID: 2905630756254517465, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 757184462}
     - target: {fileID: 2991048719798957354, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -34024,7 +34054,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f7a3a4060c8920748a1772651c77b136, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 757184462}
   m_SourcePrefab: {fileID: 100100000, guid: f7a3a4060c8920748a1772651c77b136, type: 3}
 --- !u!1 &1872372842
 GameObject:
