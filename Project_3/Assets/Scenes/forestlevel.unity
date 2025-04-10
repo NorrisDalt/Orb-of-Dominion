@@ -4531,6 +4531,22 @@ PrefabInstance:
       propertyPath: orbMovement
       value: 
       objectReference: {fileID: 2047171767}
+    - target: {fileID: 9182655681227733609, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 2047171766}
+    - target: {fileID: 9182655681227733609, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.006244547
+      objectReference: {fileID: 0}
+    - target: {fileID: 9182655681227733609, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.032482497
+      objectReference: {fileID: 0}
+    - target: {fileID: 9182655681227733609, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0.076910645
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4870887058155357426, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
@@ -41443,15 +41459,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.78
+      value: -6.35
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.45
+      value: 1.635
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.71
+      value: 1.444
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       propertyPath: m_LocalRotation.w
