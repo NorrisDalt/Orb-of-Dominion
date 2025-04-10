@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,11 +20,15 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform cameraTransform;
 
+    public Slider slider;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true; //prevent Rigidbody rotation to avoid camera shake
         pCurrentHealth = pMaxHealth;
+        slider.maxValue = pMaxHealth;
+        slider.value = pCurrentHealth;
     }
 
     void Update()
@@ -77,6 +82,8 @@ public class PlayerMovement : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         pCurrentHealth -= dmg;
+
+        slider.value = pCurrentHealth;
 
         if(pCurrentHealth <= 0)
         {
