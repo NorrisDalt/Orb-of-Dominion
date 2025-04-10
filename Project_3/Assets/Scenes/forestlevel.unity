@@ -1069,6 +1069,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0a16b035361ddd544b493c17b88647e6, type: 3}
   m_PrefabInstance: {fileID: 196438474}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &293313738 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1307739981569286635, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+  m_PrefabInstance: {fileID: 877148248}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &296216269
 GameObject:
   m_ObjectHideFlags: 0
@@ -2244,6 +2249,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0001d05dfe16fb468e6db45c301eb90, type: 3}
+--- !u!114 &512357149 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2905630756254517465, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+  m_PrefabInstance: {fileID: 877148248}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65677649865403646aed0d438e01bd74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &512357154 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3310231347530316880, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
@@ -3819,6 +3835,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8004640820515314824, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
+      propertyPath: orbMovement
+      value: 
+      objectReference: {fileID: 2047171767}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4870887058155357426, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
@@ -39033,7 +39053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972c684393185c64b81b8263d0e334d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 512357149}
   drainAmount: 5
 --- !u!114 &2047171765
 MonoBehaviour:
@@ -39088,8 +39108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435e89b428936de4e98d3aa85b94f480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  cameraTransform: {fileID: 0}
+  player: {fileID: 512357154}
+  cameraTransform: {fileID: 293313738}
   orbitSpeed: 3
   orbitRadius: 1.5
   verticalOffset: 0.5
@@ -39117,8 +39137,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8590629635806464024, guid: fbfcd468fe1d97b48965f348a02b9663, type: 3}
   projectileSpeed: 30
-  player: {fileID: 0}
-  cameraTransform: {fileID: 0}
+  player: {fileID: 512357154}
+  cameraTransform: {fileID: 293313738}
   orbCollider: {fileID: 2047171769}
   orbMovement: {fileID: 2047171767}
   fireCooldown: 1.7
