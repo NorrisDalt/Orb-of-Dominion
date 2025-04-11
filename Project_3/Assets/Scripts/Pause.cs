@@ -51,6 +51,10 @@ public class PauseManager : MonoBehaviour
         {
             pausePanel.SetActive(false);
         }
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         Debug.Log("Game Resumed via Button");
     }
 
