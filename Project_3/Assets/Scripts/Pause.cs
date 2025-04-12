@@ -51,10 +51,6 @@ public class PauseManager : MonoBehaviour
         {
             pausePanel.SetActive(false);
         }
-
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
         Debug.Log("Game Resumed via Button");
     }
 
@@ -73,13 +69,5 @@ public class PauseManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false; // Stops play mode in editor
 #endif
-    }
-
-    public void RestartScene()
-    {
-        Time.timeScale = 1f; // Make sure time is running again
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
-        Debug.Log("Restarting Scene...");
     }
 }
