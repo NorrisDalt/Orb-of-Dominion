@@ -70,12 +70,4 @@ public class PauseManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false; // Stops play mode in editor
 #endif
     }
-
-    public void RestartScene()
-    {
-        Time.timeScale = 1f; // Make sure time is running again
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
-        Debug.Log("Restarting Scene...");
-    }
 }

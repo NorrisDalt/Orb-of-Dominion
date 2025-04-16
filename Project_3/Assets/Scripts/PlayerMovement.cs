@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,14 +9,6 @@ public class PlayerMovement : MonoBehaviour
     public float JumpForce = 5f;
     public float GravityMultiplier = 2f;
 
-    public float pMaxHealth = 100f;
-    public float pCurrentHealth;
-
-    //Invincible frames
-    public float iFrameDuration;
-    private float iFrameTimer;
-    private bool isInvincible;
-
     private float _vInput;
     private float _hInput;
     private bool _isGrounded;
@@ -26,36 +16,17 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform cameraTransform;
 
-    public Slider slider;
-
-    public Animator animator;
-
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true; //prevent Rigidbody rotation to avoid camera shake
-        pCurrentHealth = pMaxHealth;
-        slider.maxValue = pMaxHealth;
-        slider.value = pCurrentHealth;
     }
 
     void Update()
-    {   
-        if(iFrameTimer > 0)
-        {
-            iFrameTimer -= Time.deltaTime;
-        }
-        else if(isInvincible)
-        {
-            isInvincible = false;
-        }
-
+    {
         //the vertical and horizontal input values
         _vInput = Input.GetAxis("Vertical") * MoveSpeed;
         _hInput = Input.GetAxis("Horizontal") * MoveSpeed;
-
-        bool isMoving = _vInput != 0 || _hInput != 0;
-        animator.SetBool("isWalking", isMoving);
 
         //jumping
         if (Input.GetButtonDown("Jump") && _isGrounded)
@@ -97,26 +68,5 @@ public class PlayerMovement : MonoBehaviour
         {
             _isGrounded = true;
         }
-    }
-    
-    public void TakeDamage(float dmg)
-    {
-        if(!isInvincible)
-        {
-             pCurrentHealth -= dmg;
-
-            slider.value = pCurrentHealth;
-
-            if(pCurrentHealth <= 0)
-            {
-                PlayerDeath();
-            }
-        }
-    }
-
-    void PlayerDeath()
-    {
-        Destroy(this.gameObject);
-        SceneManager.LoadScene(3);
     }
 }
