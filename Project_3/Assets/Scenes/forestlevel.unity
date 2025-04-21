@@ -1492,11 +1492,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ea0b0a85d45613841a3f9b784cd1e6d8, type: 3}
   m_PrefabInstance: {fileID: 1798255099}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &293313738 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1307739981569286635, guid: 2d2ecc9ff2d639649b18d022a2add74a, type: 3}
-  m_PrefabInstance: {fileID: 877148248}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &296216269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1736,7 +1731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.4, y: 0.21821205}
   m_AnchorMax: {x: 0.5975001, y: 0.34}
-  m_AnchoredPosition: {x: 1, y: -1.4999695}
+  m_AnchoredPosition: {x: 1, y: -1.4999542}
   m_SizeDelta: {x: 2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &367573870
@@ -40669,7 +40664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 512357154}
-  cameraTransform: {fileID: 293313738}
+  cameraTransform: {fileID: 512357154}
   orbitSpeed: 3
   orbitRadius: 1.5
   verticalOffset: 0.5
@@ -40698,7 +40693,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8590629635806464024, guid: fbfcd468fe1d97b48965f348a02b9663, type: 3}
   projectileSpeed: 30
   player: {fileID: 512357154}
-  cameraTransform: {fileID: 293313738}
+  cameraTransform: {fileID: 512357154}
   orbCollider: {fileID: 2047171769}
   orbMovement: {fileID: 2047171767}
   fireCooldown: 1.7
