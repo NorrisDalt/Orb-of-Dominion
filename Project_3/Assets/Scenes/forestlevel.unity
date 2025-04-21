@@ -7842,6 +7842,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewOrb
       objectReference: {fileID: 0}
+    - target: {fileID: 891198409053647451, guid: 5a16f5c40e61ab34ab1f862fa0a1ebe8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6372344977300285813, guid: 5a16f5c40e61ab34ab1f862fa0a1ebe8, type: 3}
       propertyPath: player
       value: 
@@ -10695,6 +10699,10 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.07693908
       objectReference: {fileID: 0}
+    - target: {fileID: 1689781551961120678, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2244794446799598984, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
       propertyPath: slider
       value: 
@@ -10779,9 +10787,37 @@ PrefabInstance:
       propertyPath: abilitySelectionButtons.Array.data[2]
       value: 
       objectReference: {fileID: 367573870}
+    - target: {fileID: 4235800220891579774, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4570871925669868875, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
       propertyPath: m_Name
       value: Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4570871925669868875, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226960589685155313, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5916086312842721490, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405890104473462764, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498797403180962578, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8087576203969049795, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
