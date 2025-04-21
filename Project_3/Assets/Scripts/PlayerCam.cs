@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCamera : MonoBehaviour
+public class PlayerCam : MonoBehaviour
 {
     public Vector3 CamOffset = new Vector3(0f, 1.2f, -2.6f);
     public float mouseSensitivity = 100f;
+    
 
     private Transform _target;
     private float pitch = 0f;
@@ -13,7 +14,7 @@ public class PlayerCamera : MonoBehaviour
 
     void Start()
     {
-        _target = GameObject.Find("Player").transform;
+        _target = GameObject.Find("Player 1").transform;
        // Cursor.lockState = CursorLockMode.Locked; //locks the cursor  //Had to turn this on for ability lvl select
     }
 
