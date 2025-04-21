@@ -31,6 +31,10 @@ public class StateController : MonoBehaviour
     private PlayerAbility currentlySelectedAbility = PlayerAbility.None;
     private bool hasSelectedAbility = false;
 
+    public float maxMana;
+    private float currentMana;
+
+
     public enum PlayerAbility
     {   
         None = 0,
