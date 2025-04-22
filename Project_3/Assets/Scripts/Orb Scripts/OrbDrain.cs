@@ -1,32 +1,74 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OrbDrain : MonoBehaviour
 {
-    public PlayerMovement player;
-
-    public float drainAmount = 5;
+    [Header("Drain Settings")]
+    public float drainAmount = 5f;
+    public float drainInterval = 1.5f;
     
-    private float hpStolen = 0;
+    [Header("References")]
+    public PlayerMovement player;
+    
+    private bool isDraining = false;
+    private Enemy currentEnemy;
+    public StateController controller;
+    public float manaCost = 9f;
 
     void OnTriggerStay(Collider col)
     {
-        if(col.CompareTag("Enemy"))
+        if(col.CompareTag("Enemy") && !isDraining)
         {
-            Enemy enemy = col.GetComponent<Enemy>();
-            DrainHealth(enemy, drainAmount);
+            currentEnemy = col.GetComponent<Enemy>();
+            if(currentEnemy != null && currentEnemy.currentHealth > 0)
+            {
+                StartCoroutine(DrainHealthRoutine());
+            }
         }
     }
 
-    void DrainHealth(Enemy enemy, float hpDrained)
+    void OnTriggerExit(Collider col)
     {
-        hpStolen = enemy.currentHealth - hpDrained;
+        if(col.CompareTag("Enemy") && col.GetComponent<Enemy>() == currentEnemy)
+        {
+            StopDraining();
+        }
+    }
 
-        enemy.currentHealth -= hpDrained;
+    IEnumerator DrainHealthRoutine()
+    {
+        isDraining = true;
+        
+        while(currentEnemy != null && currentEnemy.currentHealth > 0 && player.pCurrentHealth < player.pMaxHealth && controller.currentMana > 0)
+        {
+            // Calculate how much we can drain without exceeding player's max health
+            float possibleDrain = player.pMaxHealth - player.pCurrentHealth;
+            float actualDrain = Mathf.Min(drainAmount, currentEnemy.currentHealth, possibleDrain);
 
-        player.pCurrentHealth += hpStolen;
+            //Calculate mana
+            controller.currentMana -= manaCost;
+            controller.manaSlider.value = controller.currentMana;
+            
+            if(actualDrain <= 0) break; // Stop if we can't drain anything
+            
+            currentEnemy.currentHealth -= actualDrain;
+            player.pCurrentHealth += actualDrain;
 
-        hpStolen = 0;
+            yield return new WaitForSeconds(drainInterval);
+        }
+        
+        StopDraining();
+    }
+
+    void StopDraining()
+    {
+        StopAllCoroutines();
+        isDraining = false;
+        currentEnemy = null;
+    }
+
+    void OnDisable()
+    {
+        StopDraining();
     }
 }
