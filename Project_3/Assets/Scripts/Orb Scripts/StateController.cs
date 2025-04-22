@@ -69,6 +69,11 @@ public class StateController : MonoBehaviour
         {
             ActivateCurrentAbility();
         }
+
+        if (singularityAbility != null && singularityAbility.enabled && currentMana <= 0)
+        {
+            singularityAbility.enabled = false;
+        }
     }
 
     #region Initialization
@@ -152,10 +157,14 @@ public class StateController : MonoBehaviour
         switch (currentlySelectedAbility)
         {
             case PlayerAbility.Singularity:
-                if (!IsAbilityOnCooldown(PlayerAbility.Singularity) && singularityAbility != null && currentMana > 0)
+                if (!IsAbilityOnCooldown(PlayerAbility.Singularity) && singularityAbility != null)
                 {
-                    singularityAbility.enabled = !singularityAbility.enabled;
-                    cooldowns[PlayerAbility.Singularity] = cooldownDuration;
+                    // Only allow toggling if we have mana or are disabling the ability
+                    if (!singularityAbility.enabled || currentMana > 0)
+                    {
+                        singularityAbility.enabled = !singularityAbility.enabled;
+                        cooldowns[PlayerAbility.Singularity] = cooldownDuration;
+                    }
                 }
                 break;
 
@@ -170,7 +179,15 @@ public class StateController : MonoBehaviour
             case PlayerAbility.Tether:
                 if (!IsAbilityOnCooldown(PlayerAbility.Tether) && tetherAbility != null && currentMana > 0)
                 {
-                    tetherAbility.TetherToggle();
+                         // Activate/deactivate tether
+                        tetherAbility.TetherToggle();
+
+                         // Auto-disable if mana runs out (optional)
+                        if (currentMana <= 0 && tetherAbility.isTethered) 
+                        {
+                            tetherAbility.TetherToggle(); // This will untether
+                        }
+    
                 }
                 break;
         }

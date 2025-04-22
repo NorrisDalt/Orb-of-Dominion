@@ -5,34 +5,46 @@ using UnityEngine;
 public class OrbTether : MonoBehaviour
 {
   public SpringJoint springJoint;
-  private bool isTethered = false;
+  public bool isTethered = false;
+  private StateController controller;
+  public float manaCost = 20f;
 
     // Start is called before the first frame update
     void Start()
     {
         springJoint = GetComponent<SpringJoint>();
+        controller = GetComponent<StateController>();
     }
 
-    public void FixedUpdate()
+    public void Update()
     {
-      //TetherToggle();
+      if (isTethered)
+      {
+        if (controller.currentMana <= 0)
+        {
+            TetherToggle();
+        }
+      }
     }
 
     public void TetherToggle()
     {
-      if(isTethered == true)
+      if(isTethered == false)
       {
         springJoint.spring = 0f;
         springJoint.damper = 0f;
-        isTethered = false;
+        isTethered = true;
         Debug.Log("Is not tethered");
       }
       else
       {
         springJoint.spring = 50f;
         springJoint.damper = 2f;
-        isTethered = true;
+        isTethered = false;
         Debug.Log("IsTethered");
+
+        controller.currentMana -= manaCost;
+        controller.manaSlider.value = controller.currentMana;
       }
     }
 }

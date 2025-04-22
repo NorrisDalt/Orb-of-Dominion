@@ -324,7 +324,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.006244547, y: 0.032482497, z: 0.076910645}
+  m_ConnectedAnchor: {x: -0.0031332064, y: 0.040337738, z: -0.085345104}
   serializedVersion: 2
   m_Spring: 0
   m_Damper: 2
@@ -361,6 +361,9 @@ MonoBehaviour:
   - {fileID: 0}
   singularityAbility: {fileID: 0}
   cooldownDuration: 2
+  manaSlider: {fileID: 0}
+  maxMana: 101
+  currentMana: 0
 --- !u!82 &3450214460392521627
 AudioSource:
   m_ObjectHideFlags: 0
