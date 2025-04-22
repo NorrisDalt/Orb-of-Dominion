@@ -29088,15 +29088,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.35
+      value: -5.873
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.635
+      value: 1.13
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.444
+      value: -3.83
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       propertyPath: m_LocalRotation.w
@@ -29163,6 +29163,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6467746176115849069}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9048168333997439649}
   m_SourcePrefab: {fileID: 100100000, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
 --- !u!4 &510591861178067169 stripped
 Transform:
@@ -29282,4 +29285,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2279329447987539678}
   G: 60
+  controller: {fileID: 0}
+--- !u!114 &9048168333997439649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891198409053647451}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972c684393185c64b81b8263d0e334d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drainAmount: 5
+  drainInterval: 1.5
+  manaCost: 9
+  player: {fileID: 0}
   controller: {fileID: 0}

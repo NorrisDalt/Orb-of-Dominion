@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b672a494277a8734c9a4a5143c84a7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: studylevel
+  sceneToLoad: studylevel_AbilitySelection
   promptUI: {fileID: 690571795}
 --- !u!1 &18458323
 GameObject:
@@ -47513,7 +47513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b672a494277a8734c9a4a5143c84a7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: forestlevel
+  sceneToLoad: forestlevel_AbilitySelection
   promptUI: {fileID: 690571795}
 --- !u!1 &1526872018
 GameObject:

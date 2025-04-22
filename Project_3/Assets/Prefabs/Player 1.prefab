@@ -299,6 +299,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   springJoint: {fileID: 0}
+  isTethered: 0
+  manaCost: 20
 --- !u!114 &2213435595428681127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +326,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0031332064, y: 0.040337738, z: -0.085345104}
+  m_ConnectedAnchor: {x: 0.0022418648, y: 0.04670685, z: 0.07693908}
   serializedVersion: 2
   m_Spring: 0
   m_Damper: 2
@@ -360,6 +362,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   singularityAbility: {fileID: 0}
+  drainAbility: {fileID: 0}
   cooldownDuration: 2
   manaSlider: {fileID: 0}
   maxMana: 101

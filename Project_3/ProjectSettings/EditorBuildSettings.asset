@@ -15,10 +15,10 @@ EditorBuildSettings:
     path: Assets/Scenes/ReturnToHub.unity
     guid: e592aebb307a896488d8eaa73016a42e
   - enabled: 1
-    path: Assets/Scenes/forestlevel.unity
+    path: Assets/Scenes/forestlevel_AbilitySelection.unity
     guid: 96234fd6821d9494e82d09c31a267847
   - enabled: 1
-    path: Assets/Scenes/studylevel.unity
+    path: Assets/Scenes/studylevel_AbilitySelection.unity
     guid: 715a2d10714a5764b95bc0aad952db52
   - enabled: 1
     path: Assets/Scenes/cryptlevel.unity

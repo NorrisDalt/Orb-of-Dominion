@@ -10,6 +10,7 @@ TagManager:
   - Projectile
   - OrbPedestal
   - Orb
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Enemy
   - OrbAndProjectile
   - PlayerOnlyCollision
-  - 
+  - SpawnPoint
   - 
   - 
   - 

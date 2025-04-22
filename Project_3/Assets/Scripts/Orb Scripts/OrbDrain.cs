@@ -1,23 +1,36 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 public class OrbDrain : MonoBehaviour
 {
     [Header("Drain Settings")]
     public float drainAmount = 5f;
     public float drainInterval = 1.5f;
+    public float manaCost = 9f;
     
     [Header("References")]
     public PlayerMovement player;
+    public StateController controller;
     
     private bool isDraining = false;
     private Enemy currentEnemy;
-    public StateController controller;
-    public float manaCost = 9f;
+
+    void Update()
+    {
+        // Only run drain logic if enabled
+        if (!enabled) return;
+        
+        // Automatic disable if no mana
+        if (controller.currentMana <= 0)
+        {
+            enabled = false;
+            return;
+        }
+    }
 
     void OnTriggerStay(Collider col)
     {
-        if(col.CompareTag("Enemy") && !isDraining)
+        if(enabled && col.CompareTag("Enemy") && !isDraining)
         {
             currentEnemy = col.GetComponent<Enemy>();
             if(currentEnemy != null && currentEnemy.currentHealth > 0)
@@ -27,30 +40,25 @@ public class OrbDrain : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider col)
-    {
-        if(col.CompareTag("Enemy") && col.GetComponent<Enemy>() == currentEnemy)
-        {
-            StopDraining();
-        }
-    }
-
     IEnumerator DrainHealthRoutine()
     {
         isDraining = true;
         
-        while(currentEnemy != null && currentEnemy.currentHealth > 0 && player.pCurrentHealth < player.pMaxHealth && controller.currentMana > 0)
+        while(enabled && currentEnemy != null && 
+              currentEnemy.currentHealth > 0 && 
+              player.pCurrentHealth < player.pMaxHealth && 
+              controller.currentMana > 0)
         {
-            // Calculate how much we can drain without exceeding player's max health
             float possibleDrain = player.pMaxHealth - player.pCurrentHealth;
             float actualDrain = Mathf.Min(drainAmount, currentEnemy.currentHealth, possibleDrain);
-
-            //Calculate mana
+            
+            if(actualDrain <= 0) break;
+            
+            // Apply mana cost
             controller.currentMana -= manaCost;
             controller.manaSlider.value = controller.currentMana;
             
-            if(actualDrain <= 0) break; // Stop if we can't drain anything
-            
+            // Transfer health
             currentEnemy.currentHealth -= actualDrain;
             player.pCurrentHealth += actualDrain;
 
