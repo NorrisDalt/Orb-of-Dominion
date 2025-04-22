@@ -29130,6 +29130,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewOrb
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2915d0fc84ecd0d42af8cd59822115ad, type: 3}
+      propertyPath: m_TagString
+      value: Orb
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -29274,3 +29282,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2279329447987539678}
   G: 60
+  controller: {fileID: 0}

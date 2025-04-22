@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - FlyingEnemy
   - Projectile
+  - OrbPedestal
+  - Orb
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
-  - 
+  - OrbAndProjectile
+  - PlayerOnlyCollision
   - 
   - 
   - 
