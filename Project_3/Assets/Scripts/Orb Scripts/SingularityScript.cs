@@ -4,6 +4,13 @@ public class SingularityScript : MonoBehaviour
 {
     public Rigidbody rb;
     public float G = 6.674f;
+    public StateController controller;
+    private float manaCost = 0.15f;
+
+    void Start()
+    {
+       // controller = GetComponent<StateController>();
+    }
     
     void FixedUpdate()
     {
@@ -16,6 +23,8 @@ public class SingularityScript : MonoBehaviour
             float distance = direction.magnitude;
             float forceMagnitude = G * (rb.mass * enemy.rb.mass) / Mathf.Pow(distance, 2);
             enemy.rb.AddForce(direction.normalized * forceMagnitude);
+            controller.currentMana -= manaCost;
+            controller.manaSlider.value = controller.currentMana;
         }
     }
 }

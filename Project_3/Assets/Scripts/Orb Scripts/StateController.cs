@@ -31,8 +31,11 @@ public class StateController : MonoBehaviour
     private PlayerAbility currentlySelectedAbility = PlayerAbility.None;
     private bool hasSelectedAbility = false;
 
-    public float maxMana;
-    private float currentMana;
+    //Slider for mana
+    [Header("Slider")]
+    public Slider manaSlider;
+    public float maxMana = 100f;
+    public float currentMana;
 
 
     public enum PlayerAbility
@@ -49,6 +52,10 @@ public class StateController : MonoBehaviour
     {
         InitializeComponents();
         StartLevel();
+
+        currentMana = maxMana;
+        manaSlider.maxValue = maxMana;
+        manaSlider.value = currentMana;
     }
 
     void Update()
@@ -145,7 +152,7 @@ public class StateController : MonoBehaviour
         switch (currentlySelectedAbility)
         {
             case PlayerAbility.Singularity:
-                if (!IsAbilityOnCooldown(PlayerAbility.Singularity) && singularityAbility != null)
+                if (!IsAbilityOnCooldown(PlayerAbility.Singularity) && singularityAbility != null && currentMana > 0)
                 {
                     singularityAbility.enabled = !singularityAbility.enabled;
                     cooldowns[PlayerAbility.Singularity] = cooldownDuration;
@@ -153,7 +160,7 @@ public class StateController : MonoBehaviour
                 break;
 
             case PlayerAbility.Portal:
-                if (!IsAbilityOnCooldown(PlayerAbility.Portal) && orbMovement != null && orbMovement.HasArrived() && portalAbility != null)
+                if (!IsAbilityOnCooldown(PlayerAbility.Portal) && orbMovement != null && orbMovement.HasArrived() && portalAbility != null && currentMana > 0)
                 {
                     portalAbility.SwapPositions();
                     cooldowns[PlayerAbility.Portal] = cooldownDuration;
@@ -161,7 +168,7 @@ public class StateController : MonoBehaviour
                 break;
 
             case PlayerAbility.Tether:
-                if (!IsAbilityOnCooldown(PlayerAbility.Tether) && tetherAbility != null)
+                if (!IsAbilityOnCooldown(PlayerAbility.Tether) && tetherAbility != null && currentMana > 0)
                 {
                     tetherAbility.TetherToggle();
                 }

@@ -6,6 +6,13 @@ public class OrbPortal : MonoBehaviour
 {
     public OrbMovement orbMovement;
     public bool abilityUnlocked = false; //unlock when needed
+    private StateController controller;
+    private float manaCost = 20f;
+
+    void Start()
+    {
+        controller = GetComponent<StateController>();
+    }
 
     void Update()
     {
@@ -25,5 +32,10 @@ public class OrbPortal : MonoBehaviour
 
         //prevent the orb from resuming its orbit immediately
         orbMovement.SetArrivedState(true);
+
+        controller.currentMana -= manaCost;
+        controller.manaSlider.value = controller.currentMana;
+
+        
     }
 }
