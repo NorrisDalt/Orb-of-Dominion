@@ -9,8 +9,20 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: c35374807c196864dbec6121ea212489
   - enabled: 1
+    path: Assets/Scenes/tutoriallevel.unity
+    guid: ed0a8991448b793458c672d1db8aa239
+  - enabled: 1
+    path: Assets/Scenes/ReturnToHub.unity
+    guid: e592aebb307a896488d8eaa73016a42e
+  - enabled: 1
     path: Assets/Scenes/forestlevel.unity
     guid: 96234fd6821d9494e82d09c31a267847
+  - enabled: 1
+    path: Assets/Scenes/studylevel.unity
+    guid: 715a2d10714a5764b95bc0aad952db52
+  - enabled: 1
+    path: Assets/Scenes/cryptlevel.unity
+    guid: fe4ae11896ea1bf4ba449afd5f520073
   - enabled: 1
     path: Assets/Scenes/YouWin.unity
     guid: 86a89c4f0185c0541acd36303959e7aa

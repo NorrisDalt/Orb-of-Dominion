@@ -25,7 +25,7 @@ public class Menu : MonoBehaviour
 
     public void LoadPlayGame()
     {
-        SceneManager.LoadScene("forestlevel");
+        SceneManager.LoadScene("tutoriallevel");
     }
 
     public void LoadQuitGame()
