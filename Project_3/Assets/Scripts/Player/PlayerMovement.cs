@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -21,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
 
     private float _vInput;
     private float _hInput;
+    private Vector2 moveInput;
+    private bool jumpPressed = false;
+
     private bool _isGrounded;
     private Rigidbody _rb;
 
@@ -30,10 +34,26 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator animator;
 
+    private PlayerControls controls;
+
+    private void Awake()
+    {
+        controls = new PlayerControls();
+
+        controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+
+        controls.Player.Jump.performed += ctx => jumpPressed = true;
+    }
+
+    private void OnEnable() => controls.Player.Enable();
+    private void OnDisable() => controls.Player.Disable();
+
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _rb.freezeRotation = true; //prevent Rigidbody rotation to avoid camera shake
+        _rb.freezeRotation = true;
         pCurrentHealth = pMaxHealth;
         slider.maxValue = pMaxHealth;
         slider.value = pCurrentHealth;
@@ -43,13 +63,17 @@ public class PlayerMovement : MonoBehaviour
     {   
         if(iFrameTimer > 0)
         {
+    {
+        if (iFrameTimer > 0)
             iFrameTimer -= Time.deltaTime;
         }
         else if(isInvincible)
         {
+        else if (isInvincible)
             isInvincible = false;
         }
 
+<<<<<<< Updated upstream
         //the vertical and horizontal input values
         _vInput = Input.GetAxis("Vertical") * MoveSpeed;
         _hInput = Input.GetAxis("Horizontal") * MoveSpeed;
@@ -57,13 +81,18 @@ public class PlayerMovement : MonoBehaviour
         slider = GameObject.Find("Health").GetComponent<Slider>();
 
         bool isMoving = _vInput != 0 || _hInput != 0;
+=======
+        bool isMoving = moveInput != Vector2.zero;
+>>>>>>> Stashed changes
         animator.SetBool("isWalking", isMoving);
 
         //jumping
         if (Input.GetButtonDown("Jump") && _isGrounded)
+        if (jumpPressed && _isGrounded)
         {
             _rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
             _isGrounded = false;
+            jumpPressed = false;
         }
     }
 
@@ -72,7 +101,6 @@ public class PlayerMovement : MonoBehaviour
         //get camera direction
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
-
         forward.y = 0;
         right.y = 0;
         forward.Normalize();
@@ -80,11 +108,13 @@ public class PlayerMovement : MonoBehaviour
 
         //combine the forward and right inputs with the camera's direction
         Vector3 direction = forward * _vInput + right * _hInput;
+        Vector3 direction = forward * moveInput.y + right * moveInput.x;
 
         //movement
         if (direction != Vector3.zero)
         {
             _rb.MovePosition(_rb.position + direction * Time.fixedDeltaTime);
+            _rb.MovePosition(_rb.position + direction * MoveSpeed * Time.fixedDeltaTime);
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             _rb.MoveRotation(Quaternion.Slerp(_rb.rotation, targetRotation, Time.fixedDeltaTime * RotateSpeed));
         }
@@ -94,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision other) //detects when the player is on the ground
+    private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
@@ -101,16 +132,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
+
     public void TakeDamage(float dmg)
     {
         if(!isInvincible)
+        if (!isInvincible)
         {
              pCurrentHealth -= dmg;
 
+            pCurrentHealth -= dmg;
             slider.value = pCurrentHealth;
 
             if(pCurrentHealth <= 0)
             {
+            if (pCurrentHealth <= 0)
                 PlayerDeath();
             }
         }
@@ -120,5 +155,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Destroy(this.gameObject);
         SceneManager.LoadScene(3);
+        SceneManager.LoadScene(7);
     }
 }

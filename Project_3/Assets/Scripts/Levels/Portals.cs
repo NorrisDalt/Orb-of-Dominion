@@ -1,18 +1,33 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class Portals : MonoBehaviour
 {
-    [SerializeField] private string sceneToLoad;           // Scene name to load
-    [SerializeField] private GameObject promptUI;          // UI panel with text
+    [SerializeField] private string sceneToLoad;
+    [SerializeField] private GameObject promptUI;
+
+    [SerializeField] private InputActionReference interactAction; // ← assign "Interact" in the Inspector
 
     private bool playerIsNear = false;
 
-    void Update()
+    private void OnEnable()
     {
-        if (playerIsNear && Input.GetKeyDown(KeyCode.Q))
+        interactAction.action.performed += OnInteract;
+        interactAction.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        interactAction.action.performed -= OnInteract;
+        interactAction.action.Disable();
+    }
+
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        if (playerIsNear)
         {
             LoadLevel();
         }

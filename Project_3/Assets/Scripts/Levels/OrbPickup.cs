@@ -1,18 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OrbPickup : MonoBehaviour
 {
     [SerializeField] private GameObject orbModelOnPedestal;
     [SerializeField] private GameObject actualOrbToUnhide;
-    [SerializeField] private GameObject doorToDestroy; // ⬅️ New
+    [SerializeField] private GameObject doorToDestroy;
+
+    [SerializeField] private InputActionReference interactAction; // ← Assign "Interact" here in Inspector
 
     private bool playerInRange = false;
 
-    private void Update()
+    private void OnEnable()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.Q))
+        interactAction.action.performed += OnInteract;
+        interactAction.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        interactAction.action.performed -= OnInteract;
+        interactAction.action.Disable();
+    }
+
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        if (playerInRange)
         {
             PickupOrb();
         }

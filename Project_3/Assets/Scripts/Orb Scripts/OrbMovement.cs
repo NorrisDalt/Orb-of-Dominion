@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OrbMovement : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class OrbMovement : MonoBehaviour
     void Update()
     {
         // Recall orb with F
-        if (Input.GetKeyDown(KeyCode.F) && !returningToPlayer)
+        if ((Input.GetKeyDown(KeyCode.F) || Gamepad.current != null && Gamepad.current.buttonNorth.wasPressedThisFrame) && !returningToPlayer)
         {
             StartReturningToPlayer();
         }
