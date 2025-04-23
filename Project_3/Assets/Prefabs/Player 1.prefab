@@ -107,7 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CamOffset: {x: 0.37, y: 0.8, z: -4}
   mouseSensitivity: 10
-  controllerSensitivity: 1.8
+  controllerSensitivity: 200
 --- !u!1 &4570871925669868875
 GameObject:
   m_ObjectHideFlags: 0

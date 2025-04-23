@@ -30646,10 +30646,6 @@ PrefabInstance:
       propertyPath: CamOffset.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6378706012087846922, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
-      propertyPath: controllerSensitivity
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 7522162330435768440, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
       propertyPath: springJoint
       value: 

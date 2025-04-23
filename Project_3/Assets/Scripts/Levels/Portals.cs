@@ -22,7 +22,6 @@ public class Portals : MonoBehaviour
     private void OnDisable()
     {
         interactAction.action.performed -= OnInteract;
-        interactAction.action.Disable();
     }
 
     private void OnInteract(InputAction.CallbackContext context)

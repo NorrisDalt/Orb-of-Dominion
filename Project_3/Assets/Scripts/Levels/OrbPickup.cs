@@ -9,7 +9,7 @@ public class OrbPickup : MonoBehaviour
     [SerializeField] private GameObject actualOrbToUnhide;
     [SerializeField] private GameObject doorToDestroy;
 
-    [SerializeField] private InputActionReference interactAction; // ← Assign "Interact" here in Inspector
+    [SerializeField] private InputActionReference interactAction;
 
     private bool playerInRange = false;
 
@@ -22,7 +22,6 @@ public class OrbPickup : MonoBehaviour
     private void OnDisable()
     {
         interactAction.action.performed -= OnInteract;
-        interactAction.action.Disable();
     }
 
     private void OnInteract(InputAction.CallbackContext context)
