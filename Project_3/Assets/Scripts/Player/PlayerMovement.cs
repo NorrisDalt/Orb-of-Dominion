@@ -15,13 +15,11 @@ public class PlayerMovement : MonoBehaviour
     public float pMaxHealth = 100f;
     public float pCurrentHealth;
 
-    //Invincible frames
+    // Invincible frames
     public float iFrameDuration;
     private float iFrameTimer;
     private bool isInvincible;
 
-    private float _vInput;
-    private float _hInput;
     private Vector2 moveInput;
     private bool jumpPressed = false;
 
@@ -69,15 +67,18 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogWarning("Health slider not found!");
         }
 
-        _rb.freezeRotation = true; //prevent Rigidbody rotation to avoid camera shake
-       // slider.maxValue = pMaxHealth;
-       // slider.value = pCurrentHealth;
+        if (cameraTransform == null)
+        {
+            Debug.LogError("Camera Transform is not assigned!");
+        }
+
+        _rb.freezeRotation = true; // Prevent Rigidbody rotation to avoid camera shake
     }
 
     void Update()
     {
-         if (iFrameTimer > 0)
-        {  
+        if (iFrameTimer > 0)
+        {
             iFrameTimer -= Time.deltaTime;
         }
         else if (isInvincible)
@@ -85,16 +86,10 @@ public class PlayerMovement : MonoBehaviour
             isInvincible = false;
         }
 
-        //the vertical and horizontal input values
-        _vInput = Input.GetAxis("Vertical") * MoveSpeed;
-        _hInput = Input.GetAxis("Horizontal") * MoveSpeed;
-        
-
         bool isMoving = moveInput != Vector2.zero;
         animator.SetBool("isWalking", isMoving);
 
-        //jumping
-        if ((Input.GetKeyDown(KeyCode.Space) || Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame) && _isGrounded)
+        if (jumpPressed && _isGrounded)
         {
             _rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
             _isGrounded = false;
@@ -104,7 +99,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        //get camera direction
+        if (cameraTransform == null) return;
+
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
         forward.y = 0;
@@ -112,10 +108,8 @@ public class PlayerMovement : MonoBehaviour
         forward.Normalize();
         right.Normalize();
 
-        //combine the forward and right inputs with the camera's direction
         Vector3 direction = forward * moveInput.y + right * moveInput.x;
 
-        //movement
         if (direction != Vector3.zero)
         {
             _rb.MovePosition(_rb.position + direction * MoveSpeed * Time.fixedDeltaTime);
@@ -123,7 +117,6 @@ public class PlayerMovement : MonoBehaviour
             _rb.MoveRotation(Quaternion.Slerp(_rb.rotation, targetRotation, Time.fixedDeltaTime * RotateSpeed));
         }
 
-        //manual gravity to avoid camera shake
         _rb.AddForce(Physics.gravity * GravityMultiplier, ForceMode.Acceleration);
     }
 
@@ -134,17 +127,15 @@ public class PlayerMovement : MonoBehaviour
             _isGrounded = true;
         }
     }
-    
 
     public void TakeDamage(float dmg)
     {
         if (!isInvincible)
         {
-             pCurrentHealth -= dmg;
-             
+            pCurrentHealth -= dmg;
             slider.value = pCurrentHealth;
 
-            if(pCurrentHealth <= 0)
+            if (pCurrentHealth <= 0)
             {
                 PlayerDeath();
             }

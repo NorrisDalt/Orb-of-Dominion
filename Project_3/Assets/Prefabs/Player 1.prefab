@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8741385898856791297}
   - component: {fileID: 4571046597408461903}
   - component: {fileID: 8511971261344332979}
-  - component: {fileID: 269802744767895088}
   - component: {fileID: 6378706012087846922}
   m_Layer: 0
   m_Name: Main Camera
@@ -94,21 +93,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4235800220891579774}
   m_Enabled: 1
---- !u!114 &269802744767895088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4235800220891579774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc77db28e95527846ba5903e675d4d00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CamOffset: {x: 0, y: 1.2, z: -2.6}
-  mouseSensitivity: 100
-  controllerSensitivity: 1
 --- !u!114 &6378706012087846922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CamOffset: {x: 0.37, y: 0.8, z: -4}
-  mouseSensitivity: 0.2
+  mouseSensitivity: 10
   controllerSensitivity: 1.8
 --- !u!1 &4570871925669868875
 GameObject:
@@ -145,7 +129,6 @@ GameObject:
   - component: {fileID: 3737187867803211041}
   - component: {fileID: 3450214460392521627}
   - component: {fileID: 6115782124960493207}
-  - component: {fileID: 7463618561874537632}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -319,6 +302,7 @@ MonoBehaviour:
   springJoint: {fileID: 1630816429946577243}
   isTethered: 0
   manaCost: 20
+  connectedBody: {fileID: 0}
 --- !u!114 &2213435595428681127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +328,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0022418648, y: 0.04670685, z: 0.07693908}
+  m_ConnectedAnchor: {x: -4.53349, y: 2.4, z: 1.4974062}
   serializedVersion: 2
   m_Spring: 0
   m_Damper: 2
@@ -507,18 +491,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7463618561874537632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4570871925669868875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70ee4a6b2040a0d488f640df944080d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8789939037347370411
 PrefabInstance:
   m_ObjectHideFlags: 0

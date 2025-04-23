@@ -9,7 +9,7 @@ public class Portals : MonoBehaviour
     [SerializeField] private string sceneToLoad;
     [SerializeField] private GameObject promptUI;
 
-    [SerializeField] private InputActionReference interactAction; // ← assign "Interact" in the Inspector
+    [SerializeField] private InputActionReference interactAction;
 
     private bool playerIsNear = false;
 
@@ -27,8 +27,6 @@ public class Portals : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("Interact performed");
-        
         if (playerIsNear)
         {
             LoadLevel();
@@ -40,7 +38,7 @@ public class Portals : MonoBehaviour
         SceneManager.LoadScene(sceneToLoad);
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -50,7 +48,7 @@ public class Portals : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
