@@ -54,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
         _vInput = Input.GetAxis("Vertical") * MoveSpeed;
         _hInput = Input.GetAxis("Horizontal") * MoveSpeed;
 
+        slider = GameObject.Find("Health").GetComponent<Slider>();
+
         bool isMoving = _vInput != 0 || _hInput != 0;
         animator.SetBool("isWalking", isMoving);
 
