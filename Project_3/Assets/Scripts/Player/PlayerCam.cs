@@ -15,7 +15,7 @@ public class PlayerCam : MonoBehaviour
     void Start()
     {
         _target = GameObject.Find("Player 1").transform;
-       // Cursor.lockState = CursorLockMode.Locked; //locks the cursor  //Had to turn this on for ability lvl select
+       Cursor.lockState = CursorLockMode.Locked; //locks the cursor  //Had to turn this on for ability lvl select
     }
 
     void LateUpdate()
