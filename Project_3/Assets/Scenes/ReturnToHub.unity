@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 7e41c1171354dd34e89546a5427fc649, type: 2}
   m_LightingSettings: {fileID: 663304137}
 --- !u!196 &4
 NavMeshSettings:
@@ -188,8 +188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b672a494277a8734c9a4a5143c84a7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: studylevel
+  sceneToLoad: studylevel_AbilitySelection
   promptUI: {fileID: 690571795}
+  interactAction: {fileID: -946364029877145198, guid: bfffc7187c8d082448c70f579aab1cb4, type: 3}
 --- !u!1 &18458323
 GameObject:
   m_ObjectHideFlags: 0
@@ -10735,6 +10736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToLoad: cryptlevel
   promptUI: {fileID: 690571795}
+  interactAction: {fileID: -946364029877145198, guid: bfffc7187c8d082448c70f579aab1cb4, type: 3}
 --- !u!1 &313380663
 GameObject:
   m_ObjectHideFlags: 0
@@ -45248,6 +45250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToLoad: forestlevel
   promptUI: {fileID: 690571795}
+  interactAction: {fileID: -946364029877145198, guid: bfffc7187c8d082448c70f579aab1cb4, type: 3}
 --- !u!1 &1526872018
 GameObject:
   m_ObjectHideFlags: 0
@@ -49223,6 +49226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CamOffset: {x: 0.37, y: 0.8, z: -4}
   mouseSensitivity: 100
+  controllerSensitivity: 1
 --- !u!1 &1747082340
 GameObject:
   m_ObjectHideFlags: 0
@@ -49748,17 +49752,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1283086412380203749, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 1283086412380203749, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1283086412380203749, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.63
+      objectReference: {fileID: 0}
     - target: {fileID: 4115118913489845435, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
       propertyPath: m_Name
       value: Canvas (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5169958177064369093, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 4115118913489845435, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5169958177064369093, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169958177064369093, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608864474273815636, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608864474273815636, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608864474273815636, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.63
       objectReference: {fileID: 0}
     - target: {fileID: 8377745408857017756, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
       propertyPath: m_Pivot.x
@@ -49842,11 +49874,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9013245792643041462, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.63
       objectReference: {fileID: 0}
     - target: {fileID: 9013245792643041462, guid: 4a25c39dd59c8cd449d9c5ee81c5e422, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
