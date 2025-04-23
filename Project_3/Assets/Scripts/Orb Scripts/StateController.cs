@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -15,11 +16,18 @@ public class StateController : MonoBehaviour
     public TextMeshProUGUI[] abilityButtonTexts;
 
     [Header("Ability Components")]
-    private OrbTether tetherAbility;
-    private OrbPortal portalAbility;
+    [SerializeField] private OrbTether tetherAbility;
+    [SerializeField] private OrbPortal portalAbility;
     public SingularityScript singularityAbility;
-    private OrbMovement orbMovement;
     public OrbDrain drainAbility;
+    [SerializeField] private OrbMovement _orbMovement;
+
+    // Public property for orbMovement access
+    public OrbMovement orbMovement
+    {
+        get => _orbMovement;
+        set => _orbMovement = value;
+    }
 
     [Header("Settings")]
     public float cooldownDuration = 5f;
@@ -61,19 +69,109 @@ public class StateController : MonoBehaviour
     {
         InitializeComponents();
         SceneManager.sceneLoaded += OnSceneLoaded;
-
+        
         currentMana = maxMana;
-        manaSlider.maxValue = maxMana;
-        manaSlider.value = currentMana;
+        if (manaSlider != null)
+        {
+            manaSlider.maxValue = maxMana;
+            manaSlider.value = currentMana;
+        }
 
-        HandleAbilitySelectionOnSceneLoad();
+        StartCoroutine(DelayedReferenceCheck());
+    }
+
+    IEnumerator DelayedReferenceCheck()
+    {
+        yield return new WaitForSeconds(0.1f);
+        
+        if (_orbMovement == null)
+        {
+            _orbMovement = FindObjectOfType<OrbMovement>(true);
+            Debug.Log(_orbMovement != null ? "Found OrbMovement" : "OrbMovement missing");
+        }
+        
+        if (manaSlider == null)
+        {
+            var sliderObj = GameObject.Find("ManaSlider");
+            if (sliderObj != null) 
+            {
+                manaSlider = sliderObj.GetComponent<Slider>();
+                if (manaSlider != null)
+                {
+                    manaSlider.maxValue = maxMana;
+                    manaSlider.value = currentMana;
+                }
+            }
+        }
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        StopAllCoroutines();
         InitializeComponents();
         PlacePlayerInNewScene();
+        StartCoroutine(DelayedSceneSetup());
+    }
+
+    IEnumerator DelayedSceneSetup()
+    {
+        yield return new WaitForEndOfFrame();
         HandleAbilitySelectionOnSceneLoad();
+    }
+
+    void PlacePlayerInNewScene()
+    {
+        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+        if (spawnPoints.Length > 0)
+        {
+            transform.position = spawnPoints[0].transform.position;
+            transform.rotation = spawnPoints[0].transform.rotation;
+        }
+        else
+        {
+            transform.position = Vector3.zero;
+            Debug.LogWarning("No spawn points found - using default position");
+        }
+    }
+
+    void InitializeComponents()
+    {
+        // Get ability components
+        tetherAbility = GetComponent<OrbTether>();
+        portalAbility = GetComponent<OrbPortal>();
+        if (singularityAbility == null)
+            singularityAbility = GetComponent<SingularityScript>();
+        if (drainAbility == null)
+            drainAbility = GetComponent<OrbDrain>();
+        
+        // Find OrbMovement in scene
+        if (_orbMovement == null)
+            _orbMovement = FindObjectOfType<OrbMovement>(true);
+
+        // Initialize UI
+        if (abilityUI != null)
+        {
+            foreach (Image ui in abilityUI)
+            {
+                if (ui != null) ui.enabled = false;
+            }
+        }
+
+        if (abilitySelectionPanel != null)
+            abilitySelectionPanel.SetActive(false);
+
+        // Ensure EventSystem exists
+        if (FindObjectOfType<EventSystem>() == null)
+        {
+            CreateEventSystem();
+        }
+    }
+
+    void CreateEventSystem()
+    {
+        GameObject eventSystem = new GameObject("EventSystem");
+        eventSystem.AddComponent<EventSystem>();
+        eventSystem.AddComponent<StandaloneInputModule>();
     }
 
     void HandleAbilitySelectionOnSceneLoad()
@@ -93,22 +191,11 @@ public class StateController : MonoBehaviour
     {
         string sceneName = SceneManager.GetActiveScene().name;
         return sceneName.Contains("LevelUp") || sceneName.Contains("AbilitySelection");
-
     }
 
     bool CanSelectNewAbility()
     {
         return unlockedAbilities.Count < System.Enum.GetValues(typeof(PlayerAbility)).Length - 1;
-    }
-
-    void PlacePlayerInNewScene()
-    {
-        GameObject spawnPoint = GameObject.FindWithTag("SpawnPoint");
-        if (spawnPoint != null)
-        {
-            transform.position = spawnPoint.transform.position;
-            transform.rotation = spawnPoint.transform.rotation;
-        }
     }
 
     void Update()
@@ -123,92 +210,42 @@ public class StateController : MonoBehaviour
             ActivateCurrentAbility();
         }
 
+        // Disable abilities if out of mana
         if (singularityAbility != null && singularityAbility.enabled && currentMana <= 0)
-        {
             singularityAbility.enabled = false;
-        }
-
+        
         if (drainAbility != null && drainAbility.enabled && currentMana <= 0)
-        {
             drainAbility.enabled = false;
-        }
     }
 
-    #region Core Systems
-    private void InitializeComponents()
+    void CheckHotkeyPresses()
     {
-        tetherAbility = GetComponent<OrbTether>();
-        portalAbility = GetComponent<OrbPortal>();
-        orbMovement = FindObjectOfType<OrbMovement>();
-        drainAbility = GetComponent<OrbDrain>();
-
-        // Find in-scene objects
-        orbMovement = FindObjectOfType<OrbMovement>(true); // Include inactive
-        // UI - Find by names/paths if not assigned
-        if (abilitySelectionPanel == null)
-        abilitySelectionPanel = GameObject.Find("Ability Panel");
-
-        if (manaSlider == null)
-        manaSlider = GameObject.Find("Mana").GetComponent<Slider>();
-
-        // Buttons - Find by parent
-        if (abilitySelectionButtons == null || abilitySelectionButtons.Length == 0)
-        {
-            Transform buttonParent = abilitySelectionPanel.transform.Find("Buttons");
-            abilitySelectionButtons = buttonParent.GetComponentsInChildren<Button>();
-        }
-
-        foreach (Image ui in abilityUI)
-        {
-            ui.enabled = false;
-        }
-        abilitySelectionPanel.SetActive(false);
-
-        if (FindObjectOfType<EventSystem>() == null)
-        {
-            GameObject obj = new GameObject("EventSystem");
-            obj.AddComponent<EventSystem>();
-            obj.AddComponent<StandaloneInputModule>();
-        }
+        if (Input.GetKeyDown(KeyCode.Alpha1) && abilityHotkeys.ContainsKey(KeyCode.Alpha1))
+            SelectAbility(abilityHotkeys[KeyCode.Alpha1]);
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && abilityHotkeys.ContainsKey(KeyCode.Alpha2))
+            SelectAbility(abilityHotkeys[KeyCode.Alpha2]);
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && abilityHotkeys.ContainsKey(KeyCode.Alpha3))
+            SelectAbility(abilityHotkeys[KeyCode.Alpha3]);
     }
 
-    private void CheckHotkeyPresses()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) TrySelectAbility(KeyCode.Alpha1);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) TrySelectAbility(KeyCode.Alpha2);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) TrySelectAbility(KeyCode.Alpha3);
-    }
-
-    private void TrySelectAbility(KeyCode key)
-    {
-        if (abilityHotkeys.TryGetValue(key, out PlayerAbility ability))
-        {
-            SelectAbility(ability);
-        }
-    }
-
-    private void UpdateCooldowns()
+    void UpdateCooldowns()
     {
         List<PlayerAbility> keys = new List<PlayerAbility>(cooldowns.Keys);
         foreach (var ability in keys)
         {
             cooldowns[ability] -= Time.deltaTime;
             if (cooldowns[ability] <= 0)
-            {
                 cooldowns.Remove(ability);
-            }
         }
     }
-    #endregion
 
-    #region Ability Management
     public void StartLevel()
     {
         hasSelectedAbility = false;
         ShowAbilitySelection();
     }
 
-    private void ShowAbilitySelection()
+    void ShowAbilitySelection()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -233,7 +270,7 @@ public class StateController : MonoBehaviour
         }
     }
 
-    private void OnAbilitySelected(PlayerAbility selectedAbility)
+    void OnAbilitySelected(PlayerAbility selectedAbility)
     {
         KeyCode hotkey = GetNextAvailableHotkey();
         abilityHotkeys[hotkey] = selectedAbility;
@@ -247,14 +284,14 @@ public class StateController : MonoBehaviour
         SelectAbility(selectedAbility);
     }
 
-    private KeyCode GetNextAvailableHotkey()
+    KeyCode GetNextAvailableHotkey()
     {
         if (!abilityHotkeys.ContainsKey(KeyCode.Alpha1)) return KeyCode.Alpha1;
         if (!abilityHotkeys.ContainsKey(KeyCode.Alpha2)) return KeyCode.Alpha2;
         return KeyCode.Alpha3;
     }
 
-    private List<PlayerAbility> GetRandomAbilities(int count)
+    List<PlayerAbility> GetRandomAbilities(int count)
     {
         List<PlayerAbility> allAbilities = System.Enum.GetValues(typeof(PlayerAbility))
             .Cast<PlayerAbility>()
@@ -268,7 +305,7 @@ public class StateController : MonoBehaviour
             .ToList();
     }
 
-    private string GetAbilityName(PlayerAbility ability)
+    string GetAbilityName(PlayerAbility ability)
     {
         return ability switch
         {
@@ -281,7 +318,7 @@ public class StateController : MonoBehaviour
         };
     }
 
-    private void SelectAbility(PlayerAbility ability)
+    void SelectAbility(PlayerAbility ability)
     {
         // Disable all abilities first
         if (singularityAbility != null) singularityAbility.enabled = false;
@@ -293,38 +330,46 @@ public class StateController : MonoBehaviour
         UpdateAbilityUI();
     }
 
-    private void UpdateAbilityUI()
+    void UpdateAbilityUI()
     {
-        foreach (Image ui in abilityUI)
+        if (abilityUI == null) return;
+
+        for (int i = 0; i < abilityUI.Length; i++)
         {
-            if (ui != null) ui.enabled = false;
+            if (abilityUI[i] != null)
+                abilityUI[i].enabled = false;
         }
 
         switch (currentlySelectedAbility)
         {
             case PlayerAbility.Singularity:
-                if (abilityUI.Length > 0) abilityUI[0].enabled = true;
+                if (abilityUI.Length > 0 && abilityUI[0] != null) 
+                    abilityUI[0].enabled = true;
                 break;
             case PlayerAbility.Portal:
-                if (abilityUI.Length > 1) abilityUI[1].enabled = true;
+                if (abilityUI.Length > 1 && abilityUI[1] != null) 
+                    abilityUI[1].enabled = true;
                 break;
             case PlayerAbility.Tether:
-                if (abilityUI.Length > 2) abilityUI[2].enabled = true;
+                if (abilityUI.Length > 2 && abilityUI[2] != null) 
+                    abilityUI[2].enabled = true;
                 break;
             case PlayerAbility.Drain:
-                if (abilityUI.Length > 3) abilityUI[3].enabled = true; // Assuming index 3 is for Drain
+                if (abilityUI.Length > 3 && abilityUI[3] != null) 
+                    abilityUI[3].enabled = true;
                 break;
         }
     }
 
-    private void ActivateCurrentAbility()
+    void ActivateCurrentAbility()
     {
-        if (currentlySelectedAbility == PlayerAbility.None) return;
+        if (currentlySelectedAbility == PlayerAbility.None || currentMana <= 0) 
+            return;
 
         switch (currentlySelectedAbility)
         {
             case PlayerAbility.Singularity:
-                if (!IsAbilityOnCooldown(PlayerAbility.Singularity) && currentMana > 0)
+                if (!IsAbilityOnCooldown(PlayerAbility.Singularity))
                 {
                     singularityAbility.enabled = !singularityAbility.enabled;
                     cooldowns[PlayerAbility.Singularity] = cooldownDuration;
@@ -332,7 +377,9 @@ public class StateController : MonoBehaviour
                 break;
 
             case PlayerAbility.Portal:
-                if (!IsAbilityOnCooldown(PlayerAbility.Portal) && orbMovement.HasArrived() && currentMana > 0)
+                if (!IsAbilityOnCooldown(PlayerAbility.Portal) && 
+                    _orbMovement != null && 
+                    _orbMovement.HasArrived())
                 {
                     portalAbility.SwapPositions();
                     cooldowns[PlayerAbility.Portal] = cooldownDuration;
@@ -340,34 +387,26 @@ public class StateController : MonoBehaviour
                 break;
 
             case PlayerAbility.Tether:
-                if (!IsAbilityOnCooldown(PlayerAbility.Tether) && currentMana > 0)
+                if (!IsAbilityOnCooldown(PlayerAbility.Tether))
                 {
                     tetherAbility.TetherToggle();
                     if (currentMana <= 0 && tetherAbility.isTethered) 
-                    {
                         tetherAbility.TetherToggle();
-                    }
                 }
                 break;
+
             case PlayerAbility.Drain:
-                if (!IsAbilityOnCooldown(PlayerAbility.Drain) && currentMana > 0)
+                if (!IsAbilityOnCooldown(PlayerAbility.Drain))
                 {
                     drainAbility.enabled = !drainAbility.enabled;
                     cooldowns[PlayerAbility.Drain] = cooldownDuration;
-
-                     // Immediately stop if no mana
-                    if (currentMana <= 0)
-                    {
-                        drainAbility.enabled = false;
-                    }
                 }
                 break;
         }
     }
 
-    private bool IsAbilityOnCooldown(PlayerAbility ability)
+    bool IsAbilityOnCooldown(PlayerAbility ability)
     {
         return cooldowns.ContainsKey(ability);
     }
-    #endregion
 }
