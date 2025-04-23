@@ -60,30 +60,23 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update()
-    {   
-        if(iFrameTimer > 0)
-        {
     {
-        if (iFrameTimer > 0)
+         if (iFrameTimer > 0)
+        {  
             iFrameTimer -= Time.deltaTime;
         }
-        else if(isInvincible)
-        {
         else if (isInvincible)
+        {
             isInvincible = false;
         }
 
-<<<<<<< Updated upstream
         //the vertical and horizontal input values
         _vInput = Input.GetAxis("Vertical") * MoveSpeed;
         _hInput = Input.GetAxis("Horizontal") * MoveSpeed;
 
-        slider = GameObject.Find("Health").GetComponent<Slider>();
+        /*slider = GameObject.Find("Health").GetComponent<Slider>();*/
 
-        bool isMoving = _vInput != 0 || _hInput != 0;
-=======
         bool isMoving = moveInput != Vector2.zero;
->>>>>>> Stashed changes
         animator.SetBool("isWalking", isMoving);
 
         //jumping
@@ -107,7 +100,6 @@ public class PlayerMovement : MonoBehaviour
         right.Normalize();
 
         //combine the forward and right inputs with the camera's direction
-        Vector3 direction = forward * _vInput + right * _hInput;
         Vector3 direction = forward * moveInput.y + right * moveInput.x;
 
         //movement
@@ -123,7 +115,6 @@ public class PlayerMovement : MonoBehaviour
         _rb.AddForce(Physics.gravity * GravityMultiplier, ForceMode.Acceleration);
     }
 
-    private void OnCollisionEnter(Collision other) //detects when the player is on the ground
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Ground"))

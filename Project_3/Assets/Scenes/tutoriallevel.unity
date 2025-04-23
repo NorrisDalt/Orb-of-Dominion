@@ -190,6 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToLoad: studylevel_AbilitySelection
   promptUI: {fileID: 690571795}
+  interactAction: {fileID: -946364029877145198, guid: bfffc7187c8d082448c70f579aab1cb4, type: 3}
 --- !u!1 &18458323
 GameObject:
   m_ObjectHideFlags: 0
@@ -11304,6 +11305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToLoad: cryptlevel
   promptUI: {fileID: 690571795}
+  interactAction: {fileID: -946364029877145198, guid: bfffc7187c8d082448c70f579aab1cb4, type: 3}
 --- !u!1 &313380663
 GameObject:
   m_ObjectHideFlags: 0
@@ -20149,6 +20151,7 @@ MonoBehaviour:
   orbModelOnPedestal: {fileID: 1303124802}
   actualOrbToUnhide: {fileID: 592250478}
   doorToDestroy: {fileID: 878101514}
+  interactAction: {fileID: -946364029877145198, guid: bfffc7187c8d082448c70f579aab1cb4, type: 3}
 --- !u!4 &466554386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2924859616714316214, guid: cdde3a03b91b5c446bdba57fd6caba0b, type: 3}
@@ -47515,6 +47518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToLoad: forestlevel_AbilitySelection
   promptUI: {fileID: 690571795}
+  interactAction: {fileID: -946364029877145198, guid: bfffc7187c8d082448c70f579aab1cb4, type: 3}
 --- !u!1 &1526872018
 GameObject:
   m_ObjectHideFlags: 0
@@ -51719,7 +51723,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CamOffset: {x: 0.37, y: 0.8, z: -4}
-  mouseSensitivity: 100
+  mouseSensitivity: 0.2
+  controllerSensitivity: 1.8
 --- !u!1 &1747082340
 GameObject:
   m_ObjectHideFlags: 0

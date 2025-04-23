@@ -5,9 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerCam : MonoBehaviour
 {
-    public Vector3 CamOffset = new Vector3(0f, 1.2f, -2.6f);
-    public float mouseSensitivity = 100f;
-    
     public Vector3 CamOffset = new Vector3(0.6f, 1.5f, -3.5f); // over-the-shoulder feel
     public float mouseSensitivity = 1f;
     public float controllerSensitivity = 1f;
@@ -40,11 +37,8 @@ public class PlayerCam : MonoBehaviour
     void Start()
     {
         _target = GameObject.Find("Player 1").transform;
-<<<<<<< Updated upstream
-       // Cursor.lockState = CursorLockMode.Locked; //locks the cursor  //Had to turn this on for ability lvl select
-=======
+
         Cursor.lockState = CursorLockMode.Locked;
->>>>>>> Stashed changes
     }
 
     void LateUpdate()
