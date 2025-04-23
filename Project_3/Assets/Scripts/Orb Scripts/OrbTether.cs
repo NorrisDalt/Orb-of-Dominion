@@ -10,16 +10,30 @@ public class OrbTether : MonoBehaviour
   public float manaCost = 20f;
   public Rigidbody connectedBody;
 
+  void Awake()
+    {
+        // Make this object persistent
+        if (FindObjectsOfType<OrbTether>().Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        springJoint = GetComponent<SpringJoint>();
+        //springJoint = GetComponent<SpringJoint>();
         controller = FindObjectOfType<StateController>();
         
     }
 
     public void Update()
     {
+      springJoint = GetComponent<SpringJoint>();
       connectedBody = GameObject.FindWithTag("Orb").GetComponent<Rigidbody>();
       springJoint.connectedBody = connectedBody; //Temporary solution for tether
 

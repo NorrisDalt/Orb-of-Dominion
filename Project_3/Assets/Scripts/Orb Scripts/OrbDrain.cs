@@ -15,6 +15,19 @@ public class OrbDrain : MonoBehaviour
     private bool isDraining = false;
     private Enemy currentEnemy;
 
+    void Awake()
+    {
+        // Make this object persistent
+        if (FindObjectsOfType<OrbDrain>().Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     void Start()
     {
         player =  GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();

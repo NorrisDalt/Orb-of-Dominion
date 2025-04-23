@@ -30,6 +30,19 @@ public class OrbMovement : MonoBehaviour
 
     public List<GameObject> allEnemiesList = new List<GameObject>();
 
+
+    void Awake()
+    {
+        // Make this object persistent
+        if (FindObjectsOfType<OrbMovement>().Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
