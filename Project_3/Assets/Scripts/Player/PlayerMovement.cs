@@ -80,8 +80,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isWalking", isMoving);
 
         //jumping
-        if (Input.GetButtonDown("Jump") && _isGrounded)
-        if (jumpPressed && _isGrounded)
+        if ((Input.GetKeyDown(KeyCode.Space) || Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame) && _isGrounded)
         {
             _rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
             _isGrounded = false;

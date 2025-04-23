@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CamOffset: {x: 0, y: 1.2, z: -2.6}
   mouseSensitivity: 100
+  controllerSensitivity: 1
 --- !u!1 &4570871925669868875
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +129,7 @@ GameObject:
   - component: {fileID: 3737187867803211041}
   - component: {fileID: 3450214460392521627}
   - component: {fileID: 6115782124960493207}
+  - component: {fileID: 7463618561874537632}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -361,8 +363,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  tetherAbility: {fileID: 0}
+  portalAbility: {fileID: 0}
   singularityAbility: {fileID: 0}
   drainAbility: {fileID: 0}
+  _orbMovement: {fileID: 0}
   cooldownDuration: 2
   manaSlider: {fileID: 0}
   maxMana: 101
@@ -486,6 +491,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7463618561874537632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4570871925669868875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ee4a6b2040a0d488f640df944080d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8789939037347370411
 PrefabInstance:
   m_ObjectHideFlags: 0
