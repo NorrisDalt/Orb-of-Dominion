@@ -27,6 +27,8 @@ public class Portals : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext context)
     {
+        Debug.Log("Interact performed");
+        
         if (playerIsNear)
         {
             LoadLevel();

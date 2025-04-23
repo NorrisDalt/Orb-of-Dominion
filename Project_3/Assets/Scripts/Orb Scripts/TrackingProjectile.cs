@@ -15,6 +15,12 @@ public class TrackingProjectile : MonoBehaviour
     private float lastFireTime = -Mathf.Infinity; //makes it so that the projectile doesnt start with a cooldown
     public float fireCooldown = 5f;
 
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        cameraTransform = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
+    }
+
     void Update()
     {
         if ((Input.GetKeyDown(KeyCode.E) || Gamepad.current != null && Gamepad.current.buttonEast.wasPressedThisFrame) && Time.time >= lastFireTime + fireCooldown) //cooldown to prevent spamming

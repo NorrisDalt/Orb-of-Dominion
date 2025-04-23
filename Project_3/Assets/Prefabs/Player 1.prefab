@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4571046597408461903}
   - component: {fileID: 8511971261344332979}
   - component: {fileID: 269802744767895088}
+  - component: {fileID: 6378706012087846922}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -108,6 +109,21 @@ MonoBehaviour:
   CamOffset: {x: 0, y: 1.2, z: -2.6}
   mouseSensitivity: 100
   controllerSensitivity: 1
+--- !u!114 &6378706012087846922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4235800220891579774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc77db28e95527846ba5903e675d4d00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CamOffset: {x: 0.37, y: 0.8, z: -4}
+  mouseSensitivity: 0.2
+  controllerSensitivity: 1.8
 --- !u!1 &4570871925669868875
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e0cc5a3af3c114b9789b712f43637c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  springJoint: {fileID: 0}
+  springJoint: {fileID: 1630816429946577243}
   isTethered: 0
   manaCost: 20
 --- !u!114 &2213435595428681127

@@ -11,7 +11,8 @@ public class OrbPortal : MonoBehaviour
 
     void Start()
     {
-        controller = GetComponent<StateController>();
+        controller = FindObjectOfType<StateController>();
+        orbMovement =  FindObjectOfType<OrbMovement>();
     }
 
     void Update()
@@ -20,6 +21,7 @@ public class OrbPortal : MonoBehaviour
         {
             SwapPositions();
         }
+        orbMovement =  FindObjectOfType<OrbMovement>(); //Temporary solution
     }
 
     public void SwapPositions()

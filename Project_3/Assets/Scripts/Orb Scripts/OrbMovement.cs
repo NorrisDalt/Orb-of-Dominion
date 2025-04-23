@@ -30,6 +30,12 @@ public class OrbMovement : MonoBehaviour
 
     public List<GameObject> allEnemiesList = new List<GameObject>();
 
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        cameraTransform = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
+    }
+
     void Update()
     {
         // Recall orb with F

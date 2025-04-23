@@ -8,16 +8,21 @@ public class OrbTether : MonoBehaviour
   public bool isTethered = false;
   private StateController controller;
   public float manaCost = 20f;
+  public Rigidbody connectedBody;
 
     // Start is called before the first frame update
     void Start()
     {
         springJoint = GetComponent<SpringJoint>();
-        controller = GetComponent<StateController>();
+        controller = FindObjectOfType<StateController>();
+        
     }
 
     public void Update()
     {
+      connectedBody = GameObject.FindWithTag("Orb").GetComponent<Rigidbody>();
+      springJoint.connectedBody = connectedBody; //Temporary solution for tether
+
       if (isTethered)
       {
         if (controller.currentMana <= 0)

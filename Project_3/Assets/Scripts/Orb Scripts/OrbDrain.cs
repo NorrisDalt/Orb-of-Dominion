@@ -15,6 +15,11 @@ public class OrbDrain : MonoBehaviour
     private bool isDraining = false;
     private Enemy currentEnemy;
 
+    void Start()
+    {
+        player =  GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+        controller = FindObjectOfType<StateController>();
+    }
     void Update()
     {
         // Only run drain logic if enabled

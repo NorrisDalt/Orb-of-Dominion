@@ -9,7 +9,7 @@ public class SingularityScript : MonoBehaviour
 
     void Start()
     {
-       // controller = GetComponent<StateController>();
+       controller = FindObjectOfType<StateController>();
     }
     
     void FixedUpdate()
@@ -24,7 +24,7 @@ public class SingularityScript : MonoBehaviour
             float forceMagnitude = G * (rb.mass * enemy.rb.mass) / Mathf.Pow(distance, 2);
             enemy.rb.AddForce(direction.normalized * forceMagnitude);
             controller.currentMana -= manaCost;
-            controller.manaSlider.value = controller.currentMana;
+            controller.manaSlider.value = controller.currentMana; //Change this
         }
     }
 }

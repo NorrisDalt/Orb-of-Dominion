@@ -58,7 +58,6 @@ public class PlayerCam : MonoBehaviour
         //rotate the camera based on mouse input
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
         transform.position = _target.position + rotation * CamOffset;
-        transform.LookAt(_target);
         transform.LookAt(_target.position + Vector3.up * 1.2f); // eye level
     }
 

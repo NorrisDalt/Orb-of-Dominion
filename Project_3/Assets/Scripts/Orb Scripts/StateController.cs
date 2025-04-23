@@ -111,6 +111,7 @@ public class StateController : MonoBehaviour
         InitializeComponents();
         PlacePlayerInNewScene();
         StartCoroutine(DelayedSceneSetup());
+        ReferenceAbility();
     }
 
     IEnumerator DelayedSceneSetup()
@@ -198,8 +199,29 @@ public class StateController : MonoBehaviour
         return unlockedAbilities.Count < System.Enum.GetValues(typeof(PlayerAbility)).Length - 1;
     }
 
+    public void ReferenceAbility()
+    {
+        abilitySelectionPanel = GameObject.Find("AbilityPanel");
+
+        abilitySelectionButtons = abilitySelectionPanel.GetComponentsInChildren<Button>();
+        
+        abilityButtonTexts = new TextMeshProUGUI[abilitySelectionButtons.Length];
+
+        for (int i = 0; i < abilitySelectionButtons.Length; i++)
+        {
+            abilityButtonTexts[i] = abilitySelectionButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+        }
+       
+       manaSlider = GameObject.Find("Mana").GetComponent<Slider>();
+
+       singularityAbility = FindObjectOfType<SingularityScript>();
+       drainAbility = FindObjectOfType<OrbDrain>();
+
+    }
+
     void Update()
     {
+
         if (!hasSelectedAbility) return;
         
         CheckHotkeyPresses();

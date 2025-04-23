@@ -52,11 +52,26 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _rb.freezeRotation = true; //prevent Rigidbody rotation to avoid camera shake
-        _rb.freezeRotation = true;
         pCurrentHealth = pMaxHealth;
-        slider.maxValue = pMaxHealth;
-        slider.value = pCurrentHealth;
+
+        GameObject sliderObj = GameObject.Find("Health");
+        if (sliderObj != null)
+        {
+            slider = sliderObj.GetComponent<Slider>();
+            if (slider != null)
+            {
+                slider.maxValue = pMaxHealth;
+                slider.value = pCurrentHealth;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Health slider not found!");
+        }
+
+        _rb.freezeRotation = true; //prevent Rigidbody rotation to avoid camera shake
+       // slider.maxValue = pMaxHealth;
+       // slider.value = pCurrentHealth;
     }
 
     void Update()
@@ -73,8 +88,7 @@ public class PlayerMovement : MonoBehaviour
         //the vertical and horizontal input values
         _vInput = Input.GetAxis("Vertical") * MoveSpeed;
         _hInput = Input.GetAxis("Horizontal") * MoveSpeed;
-
-        /*slider = GameObject.Find("Health").GetComponent<Slider>();*/
+        
 
         bool isMoving = moveInput != Vector2.zero;
         animator.SetBool("isWalking", isMoving);
@@ -104,7 +118,6 @@ public class PlayerMovement : MonoBehaviour
         //movement
         if (direction != Vector3.zero)
         {
-            _rb.MovePosition(_rb.position + direction * Time.fixedDeltaTime);
             _rb.MovePosition(_rb.position + direction * MoveSpeed * Time.fixedDeltaTime);
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             _rb.MoveRotation(Quaternion.Slerp(_rb.rotation, targetRotation, Time.fixedDeltaTime * RotateSpeed));
@@ -125,17 +138,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        if(!isInvincible)
         if (!isInvincible)
         {
              pCurrentHealth -= dmg;
-
-            pCurrentHealth -= dmg;
+             
             slider.value = pCurrentHealth;
 
             if(pCurrentHealth <= 0)
             {
-            if (pCurrentHealth <= 0)
                 PlayerDeath();
             }
         }
@@ -144,7 +154,6 @@ public class PlayerMovement : MonoBehaviour
     void PlayerDeath()
     {
         Destroy(this.gameObject);
-        SceneManager.LoadScene(3);
         SceneManager.LoadScene(7);
     }
 }
