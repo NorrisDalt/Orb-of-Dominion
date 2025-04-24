@@ -14,9 +14,10 @@ public class WaveSpawner : MonoBehaviour
     
     void Start()
     {
+        orb = FindObjectOfType<OrbMovement>();
+        
         StartCoroutine(SpawnWaves());
 
-        orb = FindObjectOfType<OrbMovement>();
     }
 
     IEnumerator SpawnWaves()

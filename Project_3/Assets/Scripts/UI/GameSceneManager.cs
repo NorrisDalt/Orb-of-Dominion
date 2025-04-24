@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameSceneManager : MonoBehaviour
 {
   public WaveSpawner wave;
+  public int gameCleared = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,14 @@ public class GameSceneManager : MonoBehaviour
         if(wave.cleared == true)
         {
             SceneManager.LoadScene(2);
+            gameCleared += 1;
+            wave.cleared = false; 
         }
+
+        if(gameCleared >= 3)
+        {
+            SceneManager.LoadScene("YouWin");
+        }
+    
     }
 }
