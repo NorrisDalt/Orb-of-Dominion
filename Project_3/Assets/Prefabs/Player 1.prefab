@@ -270,7 +270,7 @@ MonoBehaviour:
   RotateSpeed: 10
   JumpForce: 10
   GravityMultiplier: 2
-  pMaxHealth: 200
+  pMaxHealth: 300
   pCurrentHealth: 0
   iFrameDuration: 0.5
   cameraTransform: {fileID: 8741385898856791297}
