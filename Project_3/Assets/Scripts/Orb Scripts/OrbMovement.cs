@@ -27,6 +27,7 @@ public class OrbMovement : MonoBehaviour
     private bool isSlashing = false;
     private bool returningToOrbit = false;
     private Vector3 slashTargetPosition;
+    private PlayerInput playerInput;
 
     public List<GameObject> allEnemiesList = new List<GameObject>();
 
@@ -42,6 +43,8 @@ public class OrbMovement : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+
+        playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
     }
     void Start()
     {
@@ -58,7 +61,7 @@ public class OrbMovement : MonoBehaviour
         }
 
         // Only slash if orb is orbiting the player
-        if (Input.GetMouseButtonDown(0) && !movingToTarget && !returningToPlayer && enemyTarget == null && !hasArrived && !isSlashing)
+        if (playerInput.actions["Slash"].WasPressedThisFrame() && !movingToTarget && !returningToPlayer && enemyTarget == null && !hasArrived && !isSlashing)
         {
             StartCoroutine(TripleSlash());
         }
