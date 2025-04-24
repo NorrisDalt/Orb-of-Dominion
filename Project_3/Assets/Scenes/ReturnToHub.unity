@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b672a494277a8734c9a4a5143c84a7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: studylevel_AbilitySelection
+  sceneToLoad: studylevel_AbilitySelection_New
   promptUI: {fileID: 690571795}
   interactAction: {fileID: -946364029877145198, guid: bfffc7187c8d082448c70f579aab1cb4, type: 3}
 --- !u!1 &18458323
