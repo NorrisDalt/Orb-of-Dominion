@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using System.Linq;
-using UnityEngine.InputSystem;
 
 public class StateController : MonoBehaviour
 {
@@ -43,8 +42,6 @@ public class StateController : MonoBehaviour
     private PlayerAbility currentlySelectedAbility = PlayerAbility.None;
     private bool hasSelectedAbility = false;
 
-    private PlayerInput playerInput;
-
     public enum PlayerAbility
     {   
         None = 0,
@@ -57,8 +54,6 @@ public class StateController : MonoBehaviour
 
     void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
-
         // Singleton pattern
         if (FindObjectsOfType<StateController>().Length > 1)
         {
@@ -226,12 +221,13 @@ public class StateController : MonoBehaviour
 
     void Update()
     {
-        if (!hasSelectedAbility) return;
 
+        if (!hasSelectedAbility) return;
+        
         CheckHotkeyPresses();
         UpdateCooldowns();
-
-        if (playerInput.actions["Use Ability"].WasPressedThisFrame())
+        
+        if (Input.GetMouseButtonDown(1))
         {
             ActivateCurrentAbility();
         }
@@ -239,21 +235,18 @@ public class StateController : MonoBehaviour
         // Disable abilities if out of mana
         if (singularityAbility != null && singularityAbility.enabled && currentMana <= 0)
             singularityAbility.enabled = false;
-
+        
         if (drainAbility != null && drainAbility.enabled && currentMana <= 0)
             drainAbility.enabled = false;
     }
 
-
     void CheckHotkeyPresses()
     {
-        var actions = playerInput.actions;
-
-        if (actions["Ability 1"].WasPressedThisFrame() && abilityHotkeys.ContainsKey(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && abilityHotkeys.ContainsKey(KeyCode.Alpha1))
             SelectAbility(abilityHotkeys[KeyCode.Alpha1]);
-        else if (actions["Ability 2"].WasPressedThisFrame() && abilityHotkeys.ContainsKey(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && abilityHotkeys.ContainsKey(KeyCode.Alpha2))
             SelectAbility(abilityHotkeys[KeyCode.Alpha2]);
-        else if (actions["Ability 3"].WasPressedThisFrame() && abilityHotkeys.ContainsKey(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && abilityHotkeys.ContainsKey(KeyCode.Alpha3))
             SelectAbility(abilityHotkeys[KeyCode.Alpha3]);
     }
 

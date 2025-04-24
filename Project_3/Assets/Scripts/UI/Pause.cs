@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
@@ -19,7 +18,7 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) || (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             TogglePause();
         }
