@@ -5608,7 +5608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 742776317942753388, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1518860123298613523, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -36098,7 +36098,6 @@ MonoBehaviour:
   - {fileID: 1645891095}
   enemyPrefabs:
   - {fileID: 5353449638826634491, guid: 634b009004b27f44c842dd815b76497e, type: 3}
-  - {fileID: 3535825273427022427, guid: 0529561d996ee4b4ca9036e3447e884f, type: 3}
   cleared: 0
 --- !u!4 &1406205246
 Transform:
@@ -36499,7 +36498,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.5222482, z: -0, w: 0.8527936}
   m_LocalPosition: {x: -21.439999, y: 0.027999997, z: -0.11000013}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.3802}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1923975896}
@@ -40727,7 +40726,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: -10.87509, y: 0.85800004, z: 20.353395}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.1596}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1923975896}
@@ -46215,7 +46214,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.52024883, z: -0, w: 0.85401475}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.6247}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1923975896}
