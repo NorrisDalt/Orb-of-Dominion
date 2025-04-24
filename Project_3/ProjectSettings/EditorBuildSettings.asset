@@ -18,8 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/forestlevel_AbilitySelection.unity
     guid: 96234fd6821d9494e82d09c31a267847
   - enabled: 1
-    path: Assets/Scenes/studylevel_AbilitySelection.unity
-    guid: 715a2d10714a5764b95bc0aad952db52
+    path: Assets/Scenes/studylevel_AbilitySelection_New.unity
+    guid: 333e4513ec1c5fb46bf078116fc600de
   - enabled: 1
     path: Assets/Scenes/cryptlevel_AbilitySelection.unity
     guid: fe4ae11896ea1bf4ba449afd5f520073
