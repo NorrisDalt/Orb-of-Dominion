@@ -9208,7 +9208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f08ab8a36dd9742b387f50f6c14c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCount: 1
+  enemyCount: 2
   spawnDelay: 0.25
   waveDelay: 0
 --- !u!114 &1936643780
@@ -9225,6 +9225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orb: {fileID: 0}
   waves:
+  - {fileID: 1936643779}
+  - {fileID: 1936643779}
   - {fileID: 1936643779}
   spawnPoints:
   - {fileID: 1847036582}

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class OrbDrain : MonoBehaviour
 {
@@ -9,15 +10,15 @@ public class OrbDrain : MonoBehaviour
     public float manaCost = 9f;
     
     [Header("References")]
-    public PlayerMovement player;
-    public StateController controller;
+    public PlayerMovement player;  // Now properly declared at class level
+    public StateController controller;  // Now properly declared at class level
     
     private bool isDraining = false;
     private Enemy currentEnemy;
 
     void Awake()
     {
-        // Make this object persistent
+        // Singleton pattern
         if (FindObjectsOfType<OrbDrain>().Length > 1)
         {
             Destroy(gameObject);
@@ -25,21 +26,39 @@ public class OrbDrain : MonoBehaviour
         else
         {
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
     }
 
     void Start()
     {
-        player =  GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
-        controller = FindObjectOfType<StateController>();
+        InitializeReferences();
     }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Reinitialize references when a new scene loads
+        InitializeReferences();
+    }
+
+    void InitializeReferences()
+    {
+        player = GameObject.FindWithTag("Player")?.GetComponent<PlayerMovement>();
+        controller = FindObjectOfType<StateController>();
+        
+        if (player == null) 
+            Debug.LogWarning("Player reference not found in OrbDrain");
+        if (controller == null) 
+            Debug.LogWarning("StateController reference not found in OrbDrain");
+    }
+
     void Update()
     {
         // Only run drain logic if enabled
         if (!enabled) return;
         
         // Automatic disable if no mana
-        if (controller.currentMana <= 0)
+        if (controller != null && controller.currentMana <= 0)
         {
             enabled = false;
             return;
@@ -64,8 +83,8 @@ public class OrbDrain : MonoBehaviour
         
         while(enabled && currentEnemy != null && 
               currentEnemy.currentHealth > 0 && 
-              player.pCurrentHealth < player.pMaxHealth && 
-              controller.currentMana > 0)
+              player != null && player.pCurrentHealth < player.pMaxHealth && 
+              controller != null && controller.currentMana > 0)
         {
             float possibleDrain = player.pMaxHealth - player.pCurrentHealth;
             float actualDrain = Mathf.Min(drainAmount, currentEnemy.currentHealth, possibleDrain);

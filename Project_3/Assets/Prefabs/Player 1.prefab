@@ -270,7 +270,7 @@ MonoBehaviour:
   RotateSpeed: 10
   JumpForce: 10
   GravityMultiplier: 2
-  pMaxHealth: 500
+  pMaxHealth: 200
   pCurrentHealth: 0
   iFrameDuration: 0.5
   cameraTransform: {fileID: 8741385898856791297}
@@ -371,7 +371,7 @@ MonoBehaviour:
   _orbMovement: {fileID: 0}
   cooldownDuration: 2
   manaSlider: {fileID: 0}
-  maxMana: 101
+  maxMana: 500
   currentMana: 0
 --- !u!82 &3450214460392521627
 AudioSource:
