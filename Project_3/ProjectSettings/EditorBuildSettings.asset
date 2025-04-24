@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/studylevel_AbilitySelection.unity
     guid: 715a2d10714a5764b95bc0aad952db52
   - enabled: 1
-    path: Assets/Scenes/cryptlevel.unity
+    path: Assets/Scenes/cryptlevel_AbilitySelection.unity
     guid: fe4ae11896ea1bf4ba449afd5f520073
   - enabled: 1
     path: Assets/Scenes/YouWin.unity

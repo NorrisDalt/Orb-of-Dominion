@@ -10809,7 +10809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b672a494277a8734c9a4a5143c84a7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: cryptlevel
+  sceneToLoad: cryptlevel_AbilitySelection
   promptUI: {fileID: 690571795}
   interactAction: {fileID: -946364029877145198, guid: bfffc7187c8d082448c70f579aab1cb4, type: 3}
 --- !u!1 &313380663
@@ -45425,7 +45425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b672a494277a8734c9a4a5143c84a7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: forestlevel
+  sceneToLoad: forestlevel_AbilitySelection
   promptUI: {fileID: 690571795}
   interactAction: {fileID: -946364029877145198, guid: bfffc7187c8d082448c70f579aab1cb4, type: 3}
 --- !u!1 &1526872018

@@ -52,7 +52,18 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         pCurrentHealth = pMaxHealth;
 
-        GameObject sliderObj = GameObject.Find("Health");
+    
+        if (cameraTransform == null)
+        {
+            Debug.LogError("Camera Transform is not assigned!");
+        }
+
+        _rb.freezeRotation = true; // Prevent Rigidbody rotation to avoid camera shake
+    }
+
+    void Update()
+    {
+        GameObject sliderObj = GameObject.Find("Health");//Temporary
         if (sliderObj != null)
         {
             slider = sliderObj.GetComponent<Slider>();
@@ -66,17 +77,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogWarning("Health slider not found!");
         }
-
-        if (cameraTransform == null)
-        {
-            Debug.LogError("Camera Transform is not assigned!");
-        }
-
-        _rb.freezeRotation = true; // Prevent Rigidbody rotation to avoid camera shake
-    }
-
-    void Update()
-    {
+        
         if (iFrameTimer > 0)
         {
             iFrameTimer -= Time.deltaTime;
