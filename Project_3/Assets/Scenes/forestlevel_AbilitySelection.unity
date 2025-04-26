@@ -9226,8 +9226,6 @@ MonoBehaviour:
   orb: {fileID: 0}
   waves:
   - {fileID: 1936643779}
-  - {fileID: 1936643779}
-  - {fileID: 1936643779}
   spawnPoints:
   - {fileID: 1847036582}
   - {fileID: 679672468}

@@ -398,12 +398,12 @@ public class StateController : MonoBehaviour
         switch (currentlySelectedAbility)
         {
             case PlayerAbility.Singularity:
-                if (!IsAbilityOnCooldown(PlayerAbility.Singularity))
+                if (singularityAbility != null && !singularityAbility.Equals(null) && !IsAbilityOnCooldown(PlayerAbility.Singularity))
                 {
                     singularityAbility.enabled = !singularityAbility.enabled;
                     cooldowns[PlayerAbility.Singularity] = cooldownDuration;
                 }
-                break;
+        break;
 
             case PlayerAbility.Portal:
                 if (!IsAbilityOnCooldown(PlayerAbility.Portal) && 

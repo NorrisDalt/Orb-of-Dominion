@@ -63,6 +63,7 @@ public class OrbDrain : MonoBehaviour
             enabled = false;
             return;
         }
+        InitializeReferences();
     }
 
     void OnTriggerStay(Collider col)
