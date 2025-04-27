@@ -414,16 +414,16 @@ public class StateController : MonoBehaviour
                 {
                     singularityAbility.enabled = !singularityAbility.enabled;
                     cooldowns[PlayerAbility.Singularity] = cooldownDuration;
+                    //Activate Singularity UI 
                 }
         break;
 
             case PlayerAbility.Portal:
-                if (!IsAbilityOnCooldown(PlayerAbility.Portal) && 
-                    _orbMovement != null && 
-                    _orbMovement.HasArrived())
+                if (!IsAbilityOnCooldown(PlayerAbility.Portal) && _orbMovement != null && _orbMovement.HasArrived())
                 {
                     portalAbility.SwapPositions();
                     cooldowns[PlayerAbility.Portal] = cooldownDuration;
+                    //Activate Portal UI
                 }
                 break;
 
@@ -433,6 +433,7 @@ public class StateController : MonoBehaviour
                     tetherAbility.TetherToggle();
                     if (currentMana <= 0 && tetherAbility.isTethered) 
                         tetherAbility.TetherToggle();
+                        //Activate Portal UI
                 }
                 break;
 
@@ -441,6 +442,7 @@ public class StateController : MonoBehaviour
                 {
                     drainAbility.enabled = !drainAbility.enabled;
                     cooldowns[PlayerAbility.Drain] = cooldownDuration;
+                    //Activate Portal UI
                 }
                 break;
         }
