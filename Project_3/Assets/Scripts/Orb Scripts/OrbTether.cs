@@ -35,7 +35,7 @@ public class OrbTether : MonoBehaviour
     {
       springJoint = GetComponent<SpringJoint>();
       connectedBody = GameObject.FindWithTag("Orb").GetComponent<Rigidbody>();
-      springJoint.connectedBody = connectedBody; //Temporary solution for tether
+     // springJoint.connectedBody = connectedBody; //Temporary solution for tether
 
       if (isTethered)
       {
@@ -57,7 +57,7 @@ public class OrbTether : MonoBehaviour
       }
       else
       {
-        springJoint.spring = 10f;
+        springJoint.spring = 2f;
         springJoint.damper = 2f;
         isTethered = false;
         Debug.Log("IsTethered");
