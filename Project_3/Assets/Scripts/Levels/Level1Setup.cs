@@ -11,7 +11,7 @@ public class Level1Setup : MonoBehaviour
         if (player != null)
         {
             // Use the public property instead of direct field access
-           // player.orbMovement = FindObjectOfType<OrbMovement>();
+            player.orbMovement = FindObjectOfType<OrbMovement>();
             
             // Additional level-specific setup
             if (player.manaSlider == null)
