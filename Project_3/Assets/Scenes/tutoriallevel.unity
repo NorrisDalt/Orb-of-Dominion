@@ -24531,6 +24531,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 891198409053647451, guid: 5a16f5c40e61ab34ab1f862fa0a1ebe8, type: 3}
   m_PrefabInstance: {fileID: 2024842354}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &592250486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592250478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d709ed950d818e44b9cb463881765b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &603261395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31009,7 +31021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3737187867803211041, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
       propertyPath: maxMana
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3737187867803211041, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
       propertyPath: cooldownDuration
@@ -59483,9 +59495,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972c684393185c64b81b8263d0e334d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drainAmount: 5
+  drainAmount: 20
   drainInterval: 0.2
-  manaCost: 9
+  manaCost: 30
   player: {fileID: 0}
   controller: {fileID: 0}
 --- !u!114 &1675057626
@@ -60536,7 +60548,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.035299033, y: -15.225647}
+  m_AnchoredPosition: {x: 0.035299033, y: -15.225708}
   m_SizeDelta: {x: 767.8159, y: 49.548706}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1736099967
@@ -75685,7 +75697,10 @@ PrefabInstance:
     - {fileID: 9048168333997439649, guid: 5a16f5c40e61ab34ab1f862fa0a1ebe8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 891198409053647451, guid: 5a16f5c40e61ab34ab1f862fa0a1ebe8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 592250486}
   m_SourcePrefab: {fileID: 100100000, guid: 5a16f5c40e61ab34ab1f862fa0a1ebe8, type: 3}
 --- !u!1 &2026681605
 GameObject:
