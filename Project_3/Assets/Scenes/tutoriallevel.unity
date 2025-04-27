@@ -31015,6 +31015,10 @@ PrefabInstance:
       propertyPath: cooldownDuration
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3737187867803211041, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
+      propertyPath: abilityUI.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4235800220891579774, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -31051,7 +31055,13 @@ PrefabInstance:
     - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4570871925669868875, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1675057626}
+    - targetCorrespondingSourceObject: {fileID: 4570871925669868875, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1675057625}
   m_SourcePrefab: {fileID: 100100000, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
 --- !u!1001 &817005479
 PrefabInstance:
@@ -59456,6 +59466,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 520666138}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1675057612 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4570871925669868875, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
+  m_PrefabInstance: {fileID: 807430904}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1675057625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675057612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972c684393185c64b81b8263d0e334d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drainAmount: 5
+  drainInterval: 0.2
+  manaCost: 9
+  player: {fileID: 0}
+  controller: {fileID: 0}
+--- !u!114 &1675057626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675057612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c4092fed8490d54eba77c9107d05223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  G: 60
+  controller: {fileID: 0}
 --- !u!43 &1681253732
 Mesh:
   m_ObjectHideFlags: 0
@@ -75633,7 +75680,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6467746176115849069, guid: 5a16f5c40e61ab34ab1f862fa0a1ebe8, type: 3}
+    - {fileID: 9048168333997439649, guid: 5a16f5c40e61ab34ab1f862fa0a1ebe8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

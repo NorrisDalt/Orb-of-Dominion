@@ -7,6 +7,17 @@ public class SingularityScript : MonoBehaviour
     public StateController controller;
     private float manaCost = 0.15f;
 
+    void Awake()
+    {
+        if (FindObjectsOfType<SingularityScript>().Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
     void Start()
     {
        controller = FindObjectOfType<StateController>();
@@ -14,6 +25,7 @@ public class SingularityScript : MonoBehaviour
     
     void FixedUpdate()
     {
+        rb = GameObject.FindWithTag("Orb").GetComponent<Rigidbody>();
         if (!enabled) return; // Only run when enabled by StateController
         
         Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);

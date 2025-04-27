@@ -44,6 +44,7 @@ public class StateController : MonoBehaviour
     private bool hasSelectedAbility = false;
 
     private PlayerInput playerInput;
+    private PlayerMovement playerMovement;
 
     public enum PlayerAbility
     {   
@@ -75,12 +76,12 @@ public class StateController : MonoBehaviour
         InitializeComponents();
         SceneManager.sceneLoaded += OnSceneLoaded;
         
-        currentMana = maxMana;
+        /*currentMana = maxMana;
         if (manaSlider != null)
         {
             manaSlider.maxValue = maxMana;
             manaSlider.value = currentMana;
-        }
+        }*/ // change if this doenst work 
 
         StartCoroutine(DelayedReferenceCheck());
     }
@@ -95,7 +96,7 @@ public class StateController : MonoBehaviour
             Debug.Log(_orbMovement != null ? "Found OrbMovement" : "OrbMovement missing");
         }
         
-        if (manaSlider == null)
+      /*  if (manaSlider == null)
         {
             var sliderObj = GameObject.Find("ManaSlider");
             if (sliderObj != null) 
@@ -107,11 +108,13 @@ public class StateController : MonoBehaviour
                     manaSlider.value = currentMana;
                 }
             }
-        }
+        }*/
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        currentMana = maxMana;
+        //playerMovement.pCurrentHealth = playerMovement.pMaxHealth; 
         StopAllCoroutines();
         InitializeComponents();
         PlacePlayerInNewScene();
@@ -145,10 +148,12 @@ public class StateController : MonoBehaviour
         // Get ability components
         tetherAbility = GetComponent<OrbTether>();
         portalAbility = GetComponent<OrbPortal>();
-        if (singularityAbility == null)
-            singularityAbility = GetComponent<SingularityScript>();
-        if (drainAbility == null)
-            drainAbility = GetComponent<OrbDrain>();
+        drainAbility = GetComponent<OrbDrain>();
+        singularityAbility = GetComponent<SingularityScript>();
+       // if (singularityAbility == null)
+         //   singularityAbility = GetComponent<SingularityScript>();
+       // if (drainAbility == null)
+        //    drainAbility = GetComponent<OrbDrain>();
         
         // Find OrbMovement in scene
         if (_orbMovement == null)
@@ -219,8 +224,8 @@ public class StateController : MonoBehaviour
        
        manaSlider = GameObject.Find("Mana").GetComponent<Slider>();
 
-       singularityAbility = FindObjectOfType<SingularityScript>();
-       drainAbility = FindObjectOfType<OrbDrain>();
+       //singularityAbility = FindObjectOfType<SingularityScript>();
+     //  drainAbility = FindObjectOfType<OrbDrain>();
 
     }
 
@@ -236,6 +241,13 @@ public class StateController : MonoBehaviour
         {
             ActivateCurrentAbility();
         }
+
+        //currentMana = maxMana;
+        if (manaSlider != null)
+        {
+            manaSlider.maxValue = maxMana;
+            manaSlider.value = currentMana;
+        } // maybe worked? 
 
         // Disable abilities if out of mana
         if (singularityAbility != null && singularityAbility.enabled && currentMana <= 0)

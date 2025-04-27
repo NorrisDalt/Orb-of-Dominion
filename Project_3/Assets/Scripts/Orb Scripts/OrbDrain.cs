@@ -16,19 +16,6 @@ public class OrbDrain : MonoBehaviour
     private bool isDraining = false;
     private Enemy currentEnemy;
 
-    void Awake()
-    {
-        // Singleton pattern
-        if (FindObjectsOfType<OrbDrain>().Length > 1)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-    }
 
     void Start()
     {
@@ -54,6 +41,7 @@ public class OrbDrain : MonoBehaviour
 
     void Update()
     {
+        controller = FindObjectOfType<StateController>();
         // Only run drain logic if enabled
         if (!enabled) return;
         
@@ -66,12 +54,12 @@ public class OrbDrain : MonoBehaviour
         InitializeReferences();
     }
 
-    void OnTriggerStay(Collider col)
+    public void CheckDrainTrigger(Collider col)
     {
-        if(enabled && col.CompareTag("Enemy") && !isDraining)
+        if (enabled && col.CompareTag("Enemy") && !isDraining)
         {
             currentEnemy = col.GetComponent<Enemy>();
-            if(currentEnemy != null && currentEnemy.currentHealth > 0)
+            if (currentEnemy != null && currentEnemy.currentHealth > 0)
             {
                 StartCoroutine(DrainHealthRoutine());
             }
