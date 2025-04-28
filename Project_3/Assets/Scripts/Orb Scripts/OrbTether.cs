@@ -9,6 +9,9 @@ public class OrbTether : MonoBehaviour
   private StateController controller;
   public float manaCost = 20f;
   public Rigidbody connectedBody;
+  public AudioSource tetherAudio;
+  public AudioClip tetherSound;
+  
 
   void Awake()
     {
@@ -54,7 +57,7 @@ public class OrbTether : MonoBehaviour
         springJoint.spring = 0f;
         springJoint.damper = 0f;
         isTethered = true;
-        Debug.Log("Is not tethered");
+        Debug.Log("Is not tethered"); 
       }
       else
       {
@@ -63,6 +66,11 @@ public class OrbTether : MonoBehaviour
         springJoint.damper = 2f;
         isTethered = false;
         Debug.Log("IsTethered");
+
+        if(tetherAudio != null && tetherSound != null)
+        {
+          tetherAudio.PlayOneShot(tetherSound);
+        }
 
         controller.currentMana -= manaCost;
         controller.manaSlider.value = controller.currentMana;

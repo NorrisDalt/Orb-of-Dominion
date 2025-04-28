@@ -8,6 +8,8 @@ public class OrbPortal : MonoBehaviour
     public bool abilityUnlocked = false; //unlock when needed
     private StateController controller;
     private float manaCost = 20f;
+    public AudioSource poratlAudio;
+    public AudioClip portalSound;
 
     void Start()
     {
@@ -31,6 +33,11 @@ public class OrbPortal : MonoBehaviour
         //swap positions
         transform.position = orbMovement.transform.position;
         orbMovement.transform.position = tempPosition;
+
+        if (poratlAudio != null && portalSound != null)
+        {
+            poratlAudio.PlayOneShot(portalSound);
+        }
 
         //prevent the orb from resuming its orbit immediately
         orbMovement.SetArrivedState(true);

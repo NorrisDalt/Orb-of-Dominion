@@ -28,7 +28,7 @@ public class WinCon : MonoBehaviour
             SceneManager.LoadScene("YouWin");
             ResetCounter(); // Optional: Reset after winning
         }
-        Debug.Log(count);
+        //Debug.Log(count);
     }
 
     // Optional: Reset the counter (call manually if needed)

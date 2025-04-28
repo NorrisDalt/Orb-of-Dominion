@@ -13,7 +13,7 @@ public class OrbDrain : MonoBehaviour
     public PlayerMovement player;  // Now properly declared at class level
     public StateController controller;  // Now properly declared at class level
     
-    private bool isDraining = false;
+    public bool isDraining = false;
     private Enemy currentEnemy;
 
 

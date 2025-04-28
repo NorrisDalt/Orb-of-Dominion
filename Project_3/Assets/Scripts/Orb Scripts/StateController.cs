@@ -48,6 +48,8 @@ public class StateController : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerMovement playerMovement;
 
+    public bool gravitySound;
+
     public enum PlayerAbility
     {   
         None = 0,
@@ -357,7 +359,7 @@ public class StateController : MonoBehaviour
             PlayerAbility.Tether => "Tether",
             PlayerAbility.Portal => "Portal",
             PlayerAbility.Singularity => "Singularity",
-            PlayerAbility.Homming => "Homming",
+            PlayerAbility.Homming => "Homing",
             PlayerAbility.Drain => "Drain",
             _ => ability.ToString()
         };
@@ -422,6 +424,14 @@ public class StateController : MonoBehaviour
                 {
                     singularityAbility.enabled = !singularityAbility.enabled;
                     cooldowns[PlayerAbility.Singularity] = cooldownDuration;
+                    if(singularityAbility.enabled)
+                    {
+                         gravitySound = true;
+                    }
+                    else if(!singularityAbility.enabled)
+                    {
+                        gravitySound = false;
+                    }
                     //Activate Singularity UI 
                 }
         break;
