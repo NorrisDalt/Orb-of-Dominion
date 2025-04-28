@@ -13,8 +13,10 @@ public class StateController : MonoBehaviour
     [Header("UI References")]
     public Image[] abilityUI;
     public GameObject abilitySelectionPanel;
+    public GameObject abilityIconPanel;
     public Button[] abilitySelectionButtons;
     public TextMeshProUGUI[] abilityButtonTexts;
+    public GameObject[] abilitySlots;
 
     [Header("Ability Components")]
     [SerializeField] private OrbTether tetherAbility;
@@ -212,9 +214,11 @@ public class StateController : MonoBehaviour
     public void ReferenceAbility()
     {
         abilitySelectionPanel = GameObject.Find("AbilityPanel");
+        
+        abilityIconPanel = GameObject.Find("AbilityLabelSlots");
 
         abilitySelectionButtons = abilitySelectionPanel.GetComponentsInChildren<Button>();
-        
+
         abilityButtonTexts = new TextMeshProUGUI[abilitySelectionButtons.Length];
 
         for (int i = 0; i < abilitySelectionButtons.Length; i++)
@@ -398,6 +402,10 @@ public class StateController : MonoBehaviour
             case PlayerAbility.Drain:
                 if (abilityUI.Length > 3 && abilityUI[3] != null) 
                     abilityUI[3].enabled = true;
+                break;
+            case PlayerAbility.Homming:
+                if (abilityUI.Length > 4 && abilityUI[4] != null) 
+                    abilityUI[4].enabled = true;
                 break;
         }
     }
