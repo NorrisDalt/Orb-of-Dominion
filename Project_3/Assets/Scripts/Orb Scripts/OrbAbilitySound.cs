@@ -13,13 +13,17 @@ public class OrbAbilitySound : MonoBehaviour
     public AudioClip gravityClip;
     public AudioClip drainClip;
 
+    public ParticleSystem gravityParticle;
+
     private bool gravitySoundWasOn;
     private bool drainSoundWasPlayed;
 
     public void Start()
     {
         SetupReferences();
+        gravityParticle.Stop();
     }
+    
 
     public void Update()
     {
@@ -48,17 +52,18 @@ public class OrbAbilitySound : MonoBehaviour
 
     private void HandleSound()
     {
-        if (stateController.gravitySound && !gravitySoundWasOn)
+        if (stateController.gravitySound && !gravitySoundWasOn && stateController.currentMana > 0) 
         {
             PlayLoopingClip(gravityClip); // Play the gravity sound on loop
+            gravityParticle.Play();
             gravitySoundWasOn = true;
         }
-        else if (!stateController.gravitySound && gravitySoundWasOn)
+        else if ((!stateController.gravitySound || stateController.currentMana <= 0) && gravitySoundWasOn)
         {
             orbAudio.Stop(); // Stop the gravity sound
+            gravityParticle.Stop();
             gravitySoundWasOn = false;
         }
-
         if (drainScript != null && drainScript.isDraining && !drainSoundWasPlayed)
         {
             PlayOneShotClip(drainClip); // Play drain sound when draining starts
