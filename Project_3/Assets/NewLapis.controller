@@ -10,8 +10,8 @@ AnimatorStateMachine:
   m_Name: New Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: -3209691607408341616}
-    m_Position: {x: 430, y: 130, z: 0}
+    m_State: {fileID: -7280425466062734581}
+    m_Position: {x: 307.9516, y: 292.89572, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -21,15 +21,15 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -3209691607408341616}
---- !u!1102 &-3209691607408341616
+  m_DefaultState: {fileID: -7280425466062734581}
+--- !u!1102 &-7280425466062734581
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Scene
+  m_Name: HumanoidANIMATION
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -42,7 +42,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 50845915c5315c043a789d1fac83fa96, type: 2}
+  m_Motion: {fileID: 7400000, guid: 31fae2d9799ecc14481dda8d33d5b71e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
