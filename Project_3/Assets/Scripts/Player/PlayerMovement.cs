@@ -34,6 +34,12 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerControls controls;
 
+    // --- Walking and Jumping Sound Variables ---
+    public AudioSource walkAudioSource;
+    public AudioClip walkClip;
+    public AudioClip jumpClip;
+    // --------------------------------------------
+
     private void Awake()
     {
         controls = new PlayerControls();
@@ -52,18 +58,24 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         pCurrentHealth = pMaxHealth;
 
-    
         if (cameraTransform == null)
         {
             Debug.LogError("Camera Transform is not assigned!");
         }
 
         _rb.freezeRotation = true; // Prevent Rigidbody rotation to avoid camera shake
+
+        if (walkAudioSource != null)
+        {
+            walkAudioSource.clip = walkClip;
+            walkAudioSource.loop = true;
+            walkAudioSource.playOnAwake = false;
+        }
     }
 
     void Update()
     {
-        GameObject sliderObj = GameObject.Find("Health");//Temporary
+        GameObject sliderObj = GameObject.Find("Health"); // Temporary
         if (sliderObj != null)
         {
             slider = sliderObj.GetComponent<Slider>();
@@ -77,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogWarning("Health slider not found!");
         }
-        
+
         if (iFrameTimer > 0)
         {
             iFrameTimer -= Time.deltaTime;
@@ -90,9 +102,34 @@ public class PlayerMovement : MonoBehaviour
         bool isMoving = moveInput != Vector2.zero;
         animator.SetBool("isWalking", isMoving);
 
+        // --- Walking Sound Logic ---
+        if (isMoving && _isGrounded)
+        {
+            if (walkAudioSource != null && !walkAudioSource.isPlaying)
+            {
+                walkAudioSource.Play();
+            }
+        }
+        else
+        {
+            if (walkAudioSource != null && walkAudioSource.isPlaying)
+            {
+                walkAudioSource.Pause();
+            }
+        }
+        // ----------------------------
+
         if (jumpPressed && _isGrounded)
         {
             _rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+
+            // --- Play Jump Sound Instantly ---
+            if (jumpClip != null)
+            {
+                AudioSource.PlayClipAtPoint(jumpClip, transform.position);
+            }
+            // ----------------------------------
+
             _isGrounded = false;
             jumpPressed = false;
         }
