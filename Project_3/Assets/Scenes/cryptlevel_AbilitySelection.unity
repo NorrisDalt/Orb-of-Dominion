@@ -15347,6 +15347,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: RestartScene
       objectReference: {fileID: 0}
+    - target: {fileID: 1540454097427463034, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 56
+      objectReference: {fileID: 0}
     - target: {fileID: 1930119208780381516, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -15454,6 +15458,22 @@ PrefabInstance:
     - target: {fileID: 4380529588141582802, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409746878259187440, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.711244
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409746878259187440, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.711244
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409746878259187440, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.711244
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409746878259187440, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 4597674466936248129, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
