@@ -123,6 +123,8 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
 
+            animator.SetBool("isJumping", true);
+
             // --- Play Jump Sound Instantly ---
             if (jumpClip != null)
             {
@@ -163,6 +165,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             _isGrounded = true;
+            animator.SetBool("isJumping", false);
         }
     }
 
