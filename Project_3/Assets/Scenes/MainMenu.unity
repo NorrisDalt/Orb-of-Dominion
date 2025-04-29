@@ -2447,7 +2447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -371, y: 237}
+  m_AnchoredPosition: {x: -371, y: 245}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &942204632
@@ -2472,7 +2472,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Alexander Thompson: Programmer\nDalton Norris: Programmer\nMatthew Newman:
     Designer\nJack Johnson: Designer\nJonathan Carrasquer: Designer\nDelaney Dion:
-    Designer\nStephen Fink-Mariani: Artist  \nWyatt Furnas: Artist\n"
+    Designer\nStephen Fink-Mariani: Artist  \nWyatt Furnas: Artist\nKatherine Quartana:
+    2D Artist/UI\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 73f0c879b82134d499df613ecd3ff42d, type: 2}
   m_sharedMaterial: {fileID: 7383431324438336699, guid: 73f0c879b82134d499df613ecd3ff42d, type: 2}
