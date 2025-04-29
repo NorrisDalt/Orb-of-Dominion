@@ -1376,7 +1376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &330929731
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4381,7 +4381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &966908169
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5509,7 +5509,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1031729285
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9773,7 +9773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1752282953
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10876,7 +10876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1872372843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11071,7 +11071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f08ab8a36dd9742b387f50f6c14c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCount: 3
+  enemyCount: 2
   spawnDelay: 0.25
   waveDelay: 0
 --- !u!114 &1936643780
@@ -11088,6 +11088,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orb: {fileID: 0}
   waves:
+  - {fileID: 1936643779}
+  - {fileID: 1936643779}
   - {fileID: 1936643779}
   spawnPoints:
   - {fileID: 1847036582}
@@ -12011,7 +12013,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2050961299
 BoxCollider:
   m_ObjectHideFlags: 0
