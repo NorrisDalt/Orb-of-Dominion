@@ -2922,7 +2922,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 49ff9876ea9c5dc47979cd1cdae54429, type: 2}
+  - {fileID: 2100000, guid: 8fea5be5f45b688468af536f95bfff34, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3768,7 +3768,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 49ff9876ea9c5dc47979cd1cdae54429, type: 2}
+  - {fileID: 2100000, guid: 8fea5be5f45b688468af536f95bfff34, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4719,10 +4719,6 @@ PrefabInstance:
     - target: {fileID: 708090548207626393, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 742776317942753388, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1518860123298613523, guid: 66d75e4f75aecf04ea5308744228f847, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -8428,7 +8424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4247347198966579682, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.0000153
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4570871925669868875, guid: 6c6bb65c428a67248bddb2b7c3d24f10, type: 3}
       propertyPath: m_Name
@@ -10860,7 +10856,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1872372843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11055,7 +11051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f08ab8a36dd9742b387f50f6c14c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCount: 2
+  enemyCount: 3
   spawnDelay: 0.25
   waveDelay: 0
 --- !u!114 &1936643780
